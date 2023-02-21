@@ -6,7 +6,7 @@
 /*   By: yamrire <yamrire@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 01:07:47 by yamrire           #+#    #+#             */
-/*   Updated: 2023/02/21 02:31:01 by yamrire          ###   ########.fr       */
+/*   Updated: 2023/02/21 03:09:58 by yamrire          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ char	**arrange_paths(char **envp)
 
 // }
 
-char	**parse_cmd(char *str)
-{
-	char	**cmd;
-}
+// char	**parse_cmd(char *str)
+// {
+// 	char	**cmd;
+// }
