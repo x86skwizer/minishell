@@ -6,7 +6,7 @@
 /*   By: yamrire <yamrire@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 01:07:47 by yamrire           #+#    #+#             */
-/*   Updated: 2023/02/22 02:26:07 by yamrire          ###   ########.fr       */
+/*   Updated: 2023/02/22 03:51:28 by yamrire          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,43 +56,31 @@ char	**arrange_paths(char **envp)
 	return (paths);
 }
 
-char	**return_cmd_options(char **paths, char **cmd_options)
+char	**get_cmd_options(t_cmd *cmd, char *cmd_av)
 {
 	char	*path_cmd;
+	char	**cmd_options;
 	int		i;
 
-	if (!paths)
+	if (!cmd->paths)
 		return (NULL);
-	i = 0;
-	while (paths[i])
+	cmd_options = ft_split(cmd_av, ' ');
+	if (!(ft_strchr(cmd_options[0], '/')))
 	{
-		path_cmd = ft_strjoin(paths[i], cmd_options[0]);
-		if (access(path_cmd, F_OK | X_OK) == 0)
+		i = 0;
+		while (cmd->paths[i])
 		{
-			free_double(paths);
-			free(cmd_options[0]);
-			cmd_options[0] = ft_strdup(path_cmd);
+			path_cmd = ft_strjoin(cmd->paths[i], cmd_options[0]);
+			if (access(path_cmd, F_OK | X_OK) == 0)
+			{
+				free(cmd_options[0]);
+				cmd_options[0] = ft_strdup(path_cmd);
+				free(path_cmd);
+				return (cmd_options);
+			}
 			free(path_cmd);
-			return (cmd_options);
+			i++;
 		}
-		free(path_cmd);
-		i++;
 	}
-	free_double(paths);
-	free_double(cmd_options);
-	return (NULL);
-}
-
-char	**get_cmd_options(char *argv, char **envp)
-{
-	char	**cmd_options;
-	char	**paths;
-
-	paths = arrange_paths(envp);
-	if (!paths)
-		return (NULL);
-	cmd_options = ft_split(argv, ' ');
-	if (ft_strchr(cmd_options[0], '/'))
-		return (cmd_options);
-	return (return_cmd_options(paths, cmd_options));
+	return (free_cmd(cmd_options));
 }

@@ -6,7 +6,7 @@
 /*   By: yamrire <yamrire@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 19:09:09 by yamrire           #+#    #+#             */
-/*   Updated: 2023/02/22 02:41:12 by yamrire          ###   ########.fr       */
+/*   Updated: 2023/02/22 04:05:54 by yamrire          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,14 @@
 # include <stdlib.h>
 # include <sys/errno.h>
 
+typedef struct s_cmd
+{
+	char	**cmd;
+	char	**paths;
+	pid_t	pid;
+}	t_cmd;
+
+
 char	**arrange_paths(char **envp);
 char	**get_paths(char **envp);
 void	free_double(char **pointer);
@@ -35,5 +43,6 @@ char	*ft_strchr(const char *str, int c);
 char	**get_cmd_options(char *argv, char **envp);
 char	**return_cmd_options(char **paths, char **cmd_options);
 void	handle_error(int static_code);
+void    ft_echo(char **str);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: yamrire <yamrire@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 19:08:42 by yamrire           #+#    #+#             */
-/*   Updated: 2023/02/22 02:45:38 by yamrire          ###   ########.fr       */
+/*   Updated: 2023/02/22 04:10:18 by yamrire          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,7 @@
 int	main(int ac, char **av, char **env)
 {
 	char	*str;
-	char	**cmd;
-	pid_t	pid;
-
-	//int	i;
+	t_cmd	cmd;
 
 	if (ac >= 1)
 	{
@@ -30,23 +27,20 @@ int	main(int ac, char **av, char **env)
 				add_history(str);
 
 			// Parsing
-			cmd = get_cmd_options(str, env);
+			cmd.paths = arrange_paths(env);
+			cmd.cmd = get_cmd_options(str, env);
 
 			// Execution
-			pid = fork();
-			if (pid == -1)
+			cmd.pid = fork();
+			if (cmd.pid == -1)
 				handle_error(errno);
-			else if (pid == 0)
+			else if (cmd.pid == 0)
 			{
-				if (execve(cmd[0], cmd, env) == -1)
+				if (execve(cmd.cmd[0], cmd.cmd, env) == -1)
 					handle_error(errno);
 			}
 			wait(NULL);
-
-			// i = 0;
-			// while (cmd[i])
-			// 	printf("%s\n", cmd[i++]);
-			free_double(cmd);
+			free_double(cmd.cmd);
 			free(str);
 		}
 	}
