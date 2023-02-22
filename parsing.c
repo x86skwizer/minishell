@@ -6,7 +6,7 @@
 /*   By: yamrire <yamrire@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 01:07:47 by yamrire           #+#    #+#             */
-/*   Updated: 2023/02/22 03:51:28 by yamrire          ###   ########.fr       */
+/*   Updated: 2023/02/22 04:15:11 by yamrire          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,5 +82,5 @@ char	**get_cmd_options(t_cmd *cmd, char *cmd_av)
 			i++;
 		}
 	}
-	return (free_cmd(cmd_options));
+	return (cmd_options);
 }

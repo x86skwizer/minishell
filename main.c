@@ -6,7 +6,7 @@
 /*   By: yamrire <yamrire@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 19:08:42 by yamrire           #+#    #+#             */
-/*   Updated: 2023/02/22 04:10:18 by yamrire          ###   ########.fr       */
+/*   Updated: 2023/02/22 04:22:33 by yamrire          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	main(int ac, char **av, char **env)
 
 			// Parsing
 			cmd.paths = arrange_paths(env);
-			cmd.cmd = get_cmd_options(str, env);
+			cmd.cmd = get_cmd_options(&cmd, str);
 
 			// Execution
 			cmd.pid = fork();

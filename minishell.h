@@ -6,7 +6,7 @@
 /*   By: yamrire <yamrire@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 19:09:09 by yamrire           #+#    #+#             */
-/*   Updated: 2023/02/22 04:05:54 by yamrire          ###   ########.fr       */
+/*   Updated: 2023/02/22 04:18:02 by yamrire          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,7 @@ size_t	ft_strlen(const char *str);
 char	*ft_strnstr(const char *haystack, const char *needle, size_t len);
 char	*ft_strdup(const char *src);
 char	*ft_strchr(const char *str, int c);
-char	**get_cmd_options(char *argv, char **envp);
-char	**return_cmd_options(char **paths, char **cmd_options);
+char	**get_cmd_options(t_cmd *cmd, char *cmd_av);
 void	handle_error(int static_code);
 void    ft_echo(char **str);
 
