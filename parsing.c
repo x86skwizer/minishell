@@ -6,25 +6,11 @@
 /*   By: yamrire <yamrire@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 01:07:47 by yamrire           #+#    #+#             */
-/*   Updated: 2023/02/22 01:27:08 by yamrire          ###   ########.fr       */
+/*   Updated: 2023/02/22 02:26:07 by yamrire          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-void	free_double(char **pointer)
-{
-	int	i;
-
-	i = 0;
-	while (pointer[i])
-	{
-		free(pointer[i]);
-		i++;
-	}
-	free (pointer);
-	pointer = NULL;
-}
 
 char	**get_paths(char **envp)
 {
