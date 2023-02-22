@@ -6,7 +6,7 @@
 /*   By: yamrire <yamrire@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 01:07:47 by yamrire           #+#    #+#             */
-/*   Updated: 2023/02/22 04:15:11 by yamrire          ###   ########.fr       */
+/*   Updated: 2023/02/22 08:47:01 by yamrire          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ char	**get_cmd_options(t_cmd *cmd, char *cmd_av)
 
 	if (!cmd->paths)
 		return (NULL);
-	cmd_options = ft_split(cmd_av, ' ');
+	cmd_options = ft_split(cmd_av, ' ');   // Parse Single & Double Quotes
 	if (!(ft_strchr(cmd_options[0], '/')))
 	{
 		i = 0;
