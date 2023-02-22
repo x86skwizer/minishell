@@ -6,7 +6,7 @@
 /*   By: yamrire <yamrire@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 19:08:42 by yamrire           #+#    #+#             */
-/*   Updated: 2023/02/22 04:51:36 by yamrire          ###   ########.fr       */
+/*   Updated: 2023/02/22 09:18:53 by yamrire          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	main(int ac, char **av, char **env)
 				add_history(str);
 
 			// Parsing
-			if (look_for_in("echo", str))
+			if (look_for_in("echo", str)) // return index after echo in str
 			{
 				printf("Found echo !\n");
 				continue ;
