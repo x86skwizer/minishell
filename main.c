@@ -6,11 +6,24 @@
 /*   By: yamrire <yamrire@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 19:08:42 by yamrire           #+#    #+#             */
-/*   Updated: 2023/02/22 04:22:33 by yamrire          ###   ########.fr       */
+/*   Updated: 2023/02/22 04:51:36 by yamrire          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+int	look_for_in(char *s1, char *s2)
+{
+	int	i;
+
+	i = 0;
+	while (s2[i] == ' ')
+		i++;
+	if (ft_strnstr(s2 + i, s1, 4))
+		return (1);
+	else
+		return (0);
+}
 
 int	main(int ac, char **av, char **env)
 {
@@ -27,8 +40,16 @@ int	main(int ac, char **av, char **env)
 				add_history(str);
 
 			// Parsing
-			cmd.paths = arrange_paths(env);
-			cmd.cmd = get_cmd_options(&cmd, str);
+			if (look_for_in("echo", str))
+			{
+				printf("Found echo !\n");
+				continue ;
+			}
+			else
+			{
+				cmd.paths = arrange_paths(env);
+				cmd.cmd = get_cmd_options(&cmd, str);
+			}
 
 			// Execution
 			cmd.pid = fork();
