@@ -6,7 +6,7 @@
 /*   By: yamrire <yamrire@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 19:09:09 by yamrire           #+#    #+#             */
-/*   Updated: 2023/02/22 02:26:51 by yamrire          ###   ########.fr       */
+/*   Updated: 2023/02/22 02:41:12 by yamrire          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <sys/wait.h>
 # include <fcntl.h>
 # include <stdlib.h>
+# include <sys/errno.h>
 
 char	**arrange_paths(char **envp);
 char	**get_paths(char **envp);
