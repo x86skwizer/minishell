@@ -6,7 +6,7 @@
 /*   By: yamrire <yamrire@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 19:09:09 by yamrire           #+#    #+#             */
-/*   Updated: 2023/02/22 01:20:05 by yamrire          ###   ########.fr       */
+/*   Updated: 2023/02/22 02:26:51 by yamrire          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,5 +33,6 @@ char	*ft_strdup(const char *src);
 char	*ft_strchr(const char *str, int c);
 char	**get_cmd_options(char *argv, char **envp);
 char	**return_cmd_options(char **paths, char **cmd_options);
+void	handle_error(int static_code);
 
 #endif
