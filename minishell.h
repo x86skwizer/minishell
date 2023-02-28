@@ -6,7 +6,7 @@
 /*   By: yamrire <yamrire@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 19:09:09 by yamrire           #+#    #+#             */
-/*   Updated: 2023/02/22 09:09:42 by yamrire          ###   ########.fr       */
+/*   Updated: 2023/02/28 03:04:00 by yamrire          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,9 @@ typedef struct s_cmd
 {
 	char	**cmd;
 	char	**paths;
+	char	*input;
+	char	*output;
+	char	*append;
 	pid_t	pid;
 }	t_cmd;
 
@@ -40,7 +43,9 @@ size_t	ft_strlen(const char *str);
 char	*ft_strnstr(const char *haystack, const char *needle, size_t len);
 char	*ft_strdup(const char *src);
 char	*ft_strchr(const char *str, int c);
-char	**get_cmd_options(t_cmd *cmd, char *cmd_av);
+void	add_cmd_path(t_cmd **cmd);
 void	handle_error(int static_code);
+void	split_arg(char *str, t_cmd **cmd);
+int		count_arg(char *str);
 
 #endif

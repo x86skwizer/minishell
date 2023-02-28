@@ -6,7 +6,7 @@
 /*   By: yamrire <yamrire@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 19:08:42 by yamrire           #+#    #+#             */
-/*   Updated: 2023/02/22 09:18:53 by yamrire          ###   ########.fr       */
+/*   Updated: 2023/02/28 18:44:39 by yamrire          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,14 @@ int	look_for_in(char *s1, char *s2)
 int	main(int ac, char **av, char **env)
 {
 	char	*str;
-	t_cmd	cmd;
+	t_cmd	*cmd;
 
 	if (ac >= 1)
 	{
 		av[1] = NULL;
 		while (1)
 		{
+			cmd = malloc(sizeof(t_cmd));
 			str = readline("minishell$  ");
 			if (str && *str)
 				add_history(str);
@@ -47,21 +48,27 @@ int	main(int ac, char **av, char **env)
 			}
 			else
 			{
-				cmd.paths = arrange_paths(env);
-				cmd.cmd = get_cmd_options(&cmd, str);
+			
+				cmd->paths = arrange_paths(env);
+				split_arg(str, &cmd);
+				add_cmd_path(&cmd);
 			}
 
+			int i = 0;
+			while (cmd->cmd[i])
+				printf("|%s|\n", cmd->cmd[i++]);
+			
 			// Execution
-			cmd.pid = fork();
-			if (cmd.pid == -1)
-				handle_error(errno);
-			else if (cmd.pid == 0)
-			{
-				if (execve(cmd.cmd[0], cmd.cmd, env) == -1)
-					handle_error(errno);
-			}
-			wait(NULL);
-			free_double(cmd.cmd);
+			// cmd->pid = fork();
+			// if (cmd->pid == -1)
+			// 	handle_error(errno);
+			// else if (cmd->pid == 0)
+			// {
+			// 	if (execve(cmd->cmd[0], cmd->cmd, env) == -1)
+			// 		handle_error(errno);
+			// }
+			// wait(NULL);
+			//free_double(cmd->cmd);
 			free(str);
 		}
 	}
