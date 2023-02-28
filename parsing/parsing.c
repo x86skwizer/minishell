@@ -6,7 +6,7 @@
 /*   By: yamrire <yamrire@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 01:07:47 by yamrire           #+#    #+#             */
-/*   Updated: 2023/02/28 23:56:41 by yamrire          ###   ########.fr       */
+/*   Updated: 2023/03/01 00:14:41 by yamrire          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ int	count_arg(char *str)
 	return (nbr);
 }
 
-void	split_arg(char *str, t_cmd **cmd)
+void	split_arg(char *str, t_pars **cmd)
 {
 	int		i;
 	int		j;
@@ -223,7 +223,7 @@ char	**arrange_paths(char **envp)
 	return (paths);
 }
 
-void	add_cmd_path(t_cmd **cmd)
+void	add_cmd_path(t_pars **cmd)
 {
 	char	*path_cmd;
 	char	*tmp;

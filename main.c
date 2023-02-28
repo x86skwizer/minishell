@@ -6,7 +6,7 @@
 /*   By: yamrire <yamrire@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 19:08:42 by yamrire           #+#    #+#             */
-/*   Updated: 2023/02/28 23:44:40 by yamrire          ###   ########.fr       */
+/*   Updated: 2023/03/01 00:13:46 by yamrire          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,14 @@ int	look_for_in(char *s1, char *s2)
 int	main(int ac, char **av, char **env)
 {
 	char	*str;
-	t_cmd	*cmd;
+	t_pars	*cmd;
 
 	if (ac >= 1)
 	{
 		av[1] = NULL;
 		while (1)
 		{
-			cmd = malloc(sizeof(t_cmd));
+			cmd = malloc(sizeof(t_pars));
 			str = readline("minishell$  ");
 			if (str && *str)
 				add_history(str);

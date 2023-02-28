@@ -6,7 +6,7 @@
 /*   By: yamrire <yamrire@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 19:09:09 by yamrire           #+#    #+#             */
-/*   Updated: 2023/02/28 23:34:07 by yamrire          ###   ########.fr       */
+/*   Updated: 2023/03/01 00:14:08 by yamrire          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 # include <stdlib.h>
 # include <sys/errno.h>
 
-typedef struct s_cmd
+typedef struct s_pars
 {
 	char	**cmd;
 	char	**paths;
@@ -31,7 +31,7 @@ typedef struct s_cmd
 	char	*append;
 	char	*delimiter;
 	pid_t	pid;
-}	t_cmd;
+}	t_pars;
 
 
 char	**arrange_paths(char **envp);
@@ -44,9 +44,9 @@ size_t	ft_strlen(const char *str);
 char	*ft_strnstr(const char *haystack, const char *needle, size_t len);
 char	*ft_strdup(const char *src);
 char	*ft_strchr(const char *str, int c);
-void	add_cmd_path(t_cmd **cmd);
+void	add_cmd_path(t_pars **cmd);
 void	handle_error(int static_code);
-void	split_arg(char *str, t_cmd **cmd);
+void	split_arg(char *str, t_pars **cmd);
 int		count_arg(char *str);
 
 #endif
