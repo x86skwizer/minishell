@@ -6,14 +6,14 @@
 #    By: yamrire <yamrire@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/20 20:11:20 by yamrire           #+#    #+#              #
-#    Updated: 2023/02/28 01:48:07 by yamrire          ###   ########.fr        #
+#    Updated: 2023/02/28 20:01:59 by yamrire          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRC = main.c parsing.c ft_split.c ft_strlen.c ft_strnstr.c ft_substr.c ft_strjoin.c ft_strdup.c ft_strchr.c utils.c
 NAME = minishell
 CC = cc
-FLAGS = -Wall -Werror -Wextra -lreadline -g
+FLAGS = -Wall -Werror -Wextra -lreadline
 OBJ = $(SRC:%.c=%.o)
 
 all : $(NAME) $(OBJ)

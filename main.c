@@ -6,7 +6,7 @@
 /*   By: yamrire <yamrire@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 19:08:42 by yamrire           #+#    #+#             */
-/*   Updated: 2023/02/28 18:44:39 by yamrire          ###   ########.fr       */
+/*   Updated: 2023/02/28 20:00:39 by yamrire          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,20 +54,20 @@ int	main(int ac, char **av, char **env)
 				add_cmd_path(&cmd);
 			}
 
-			int i = 0;
-			while (cmd->cmd[i])
-				printf("|%s|\n", cmd->cmd[i++]);
+			// int i = 0;
+			// while (cmd->cmd[i])
+			// 	printf("|%s|\n", cmd->cmd[i++]);
 			
 			// Execution
-			// cmd->pid = fork();
-			// if (cmd->pid == -1)
-			// 	handle_error(errno);
-			// else if (cmd->pid == 0)
-			// {
-			// 	if (execve(cmd->cmd[0], cmd->cmd, env) == -1)
-			// 		handle_error(errno);
-			// }
-			// wait(NULL);
+			cmd->pid = fork();
+			if (cmd->pid == -1)
+				handle_error(errno);
+			else if (cmd->pid == 0)
+			{
+				if (execve(cmd->cmd[0], cmd->cmd, env) == -1)
+					handle_error(errno);
+			}
+			wait(NULL);
 			//free_double(cmd->cmd);
 			free(str);
 		}
