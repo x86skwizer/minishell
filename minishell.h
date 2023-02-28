@@ -6,7 +6,7 @@
 /*   By: yamrire <yamrire@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 19:09:09 by yamrire           #+#    #+#             */
-/*   Updated: 2023/02/28 03:04:00 by yamrire          ###   ########.fr       */
+/*   Updated: 2023/02/28 23:34:07 by yamrire          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ typedef struct s_cmd
 	char	*input;
 	char	*output;
 	char	*append;
+	char	*delimiter;
 	pid_t	pid;
 }	t_cmd;
 

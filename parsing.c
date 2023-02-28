@@ -6,7 +6,7 @@
 /*   By: yamrire <yamrire@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 01:07:47 by yamrire           #+#    #+#             */
-/*   Updated: 2023/02/28 17:55:14 by yamrire          ###   ########.fr       */
+/*   Updated: 2023/02/28 23:46:55 by yamrire          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,25 @@ int	count_arg(char *str)
 					i++;
 			}
 		}
+		else if (str[i] == '<')
+		{
+			i++;
+			if (str[i] == '<')
+			{
+				i++;
+				while (str[i] && str[i] == ' ')
+					i++;
+				while (str[i] && str[i] != ' ')
+					i++;
+			}
+			else
+			{
+				while (str[i] && str[i] == ' ')
+					i++;
+				while (str[i] && str[i] != ' ')
+					i++;
+			}
+		}
 		else if (str[i] && str[i] != ' ')
 		{
 			while (str[i] && str[i] != ' ') // if !str[i] print error
@@ -77,7 +96,6 @@ void	split_arg(char *str, t_cmd **cmd)
 	i = 0;
 	j = 0;
 	nbr = count_arg(str);
-	// cmd->cmd = malloc(sizeof(char *) * (count_arg(str) + 1));
 	(*cmd)->cmd = malloc(sizeof(char *) * (nbr + 1));
 	while (str[i] != '\0' && str[i] != '|')
 	{
@@ -87,7 +105,7 @@ void	split_arg(char *str, t_cmd **cmd)
 		{
 			i++;
 			start = i;
-			while (str[i] && str[i] != 34) // if !str[i] print error
+			while (str[i] && str[i] != 34)
 				i++;
 			(*cmd)->cmd[j] = ft_substr(str, start, i - start);
 			j++;
@@ -97,7 +115,7 @@ void	split_arg(char *str, t_cmd **cmd)
 		{
 			i++;
 			start = i;
-			while (str[i] && str[i] != 39) // if !str[i] print error
+			while (str[i] && str[i] != 39)
 				i++;
 			(*cmd)->cmd[j] = ft_substr(str, start, i - start);
 			i++;
@@ -126,10 +144,33 @@ void	split_arg(char *str, t_cmd **cmd)
 				(*cmd)->output = ft_substr(str, start, i - start);
 			}
 		}
+		else if (str[i] == '<')
+		{
+			i++;
+			if (str[i] == '<')
+			{
+				i++;
+				while (str[i] && str[i] == ' ')
+					i++;
+				start = i;
+				while (str[i] && str[i] != ' ')
+					i++;
+				(*cmd)->delimiter = ft_substr(str, start, i - start);
+			}
+			else
+			{
+				while (str[i] && str[i] == ' ')
+					i++;
+				start = i;
+				while (str[i] && str[i] != ' ')
+					i++;
+				(*cmd)->input = ft_substr(str, start, i - start);
+			}
+		}
 		else if (str[i] && str[i] != ' ')
 		{
 			start = i;
-			while (str[i] && str[i] != ' ') // if !str[i] print error
+			while (str[i] && str[i] != ' ')
 				i++;
 			(*cmd)->cmd[j] = ft_substr(str, start, i - start);
 			j++;
@@ -190,7 +231,6 @@ void	add_cmd_path(t_cmd **cmd)
 
 	if (!(*cmd)->paths)
 		return ;
-	// Parse Single & Double Quotes
 	tmp = ft_strdup((*cmd)->cmd[0]);
 	if (!(ft_strchr((*cmd)->cmd[0], '/')))
 	{
