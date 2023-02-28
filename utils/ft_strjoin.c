@@ -6,11 +6,11 @@
 /*   By: yamrire <yamrire@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 00:16:47 by yamrire           #+#    #+#             */
-/*   Updated: 2023/02/28 23:57:14 by yamrire          ###   ########.fr       */
+/*   Updated: 2023/03/01 00:19:23 by yamrire          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "../parsing.h"
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {

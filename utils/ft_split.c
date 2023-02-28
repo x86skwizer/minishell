@@ -6,11 +6,11 @@
 /*   By: yamrire <yamrire@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 23:48:54 by yamrire           #+#    #+#             */
-/*   Updated: 2023/02/28 23:56:57 by yamrire          ###   ########.fr       */
+/*   Updated: 2023/03/01 00:19:05 by yamrire          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "../parsing.h"
 
 int	count_words(char const *src, char c)
 {

@@ -6,11 +6,11 @@
 /*   By: yamrire <yamrire@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 02:23:44 by yamrire           #+#    #+#             */
-/*   Updated: 2023/02/28 23:57:20 by yamrire          ###   ########.fr       */
+/*   Updated: 2023/03/01 00:19:30 by yamrire          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "../parsing.h"
 
 size_t	ft_strlen(const char *str)
 {
