@@ -6,7 +6,7 @@
 /*   By: yamrire <yamrire@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 19:08:42 by yamrire           #+#    #+#             */
-/*   Updated: 2023/03/01 03:07:14 by yamrire          ###   ########.fr       */
+/*   Updated: 2023/03/01 03:23:51 by yamrire          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,11 @@ int	main(int ac, char **av, char **env)
 				wait(NULL);
 				free_double(cmd->cmd);
 				free(str);
+			}
+			else if (!ft_strcmp("echo", cmd->cmd[0]))
+			{
+				printf("Executing echo...\n");
+				builtin_echo(cmd->cmd);
 			}
 			else
 				printf("Found it!\n");
