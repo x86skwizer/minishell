@@ -6,24 +6,11 @@
 /*   By: yamrire <yamrire@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 19:08:42 by yamrire           #+#    #+#             */
-/*   Updated: 2023/03/01 00:18:11 by yamrire          ###   ########.fr       */
+/*   Updated: 2023/03/01 01:36:42 by yamrire          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
-
-int	look_for_in(char *s1, char *s2)
-{
-	int	i;
-
-	i = 0;
-	while (s2[i] == ' ')
-		i++;
-	if (ft_strnstr(s2 + i, s1, 4))
-		return (1);
-	else
-		return (0);
-}
 
 int	main(int ac, char **av, char **env)
 {
@@ -41,19 +28,17 @@ int	main(int ac, char **av, char **env)
 				add_history(str);
 
 			// Parsing
-			if (look_for_in("echo", str)) // return index after echo in str
-			{
-				printf("Found echo !\n");
-				continue ;
-			}
+			cmd->paths = arrange_paths(env);
+			split_arg(str, &cmd);
+			if (ft_strcmp("echo", cmd->cmd[0]) && ft_strcmp("cd", cmd->cmd[0]) 
+				&& ft_strcmp("pwd", cmd->cmd[0]) && ft_strcmp("export", cmd->cmd[0]) 
+				&& ft_strcmp("unset", cmd->cmd[0]) && ft_strcmp("env", cmd->cmd[0]) && ft_strcmp("exit", cmd->cmd[0]))
+				add_cmd_path(&cmd);
 			else
 			{
-			
-				cmd->paths = arrange_paths(env);
-				split_arg(str, &cmd);
-				add_cmd_path(&cmd);
+				printf("found it !\n");
+				continue ;
 			}
-
 			int i = 0;
 			while (cmd->cmd[i])
 			{
