@@ -6,11 +6,34 @@
 /*   By: yamrire <yamrire@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 19:08:42 by yamrire           #+#    #+#             */
-/*   Updated: 2023/03/01 04:31:57 by yamrire          ###   ########.fr       */
+/*   Updated: 2023/03/01 07:21:25 by yamrire          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
+
+int	check_error_parsing(char *str)
+{
+	int	len;
+	int	i;
+
+	len = ft_strlen(str);
+	i = 0;
+	while (str[i] == ' ')
+		i++;
+	if (str[i] == '|')
+		return (-1);
+	i = len - 1;
+	while (str[i] == ' ')
+		i--;
+	if (str[i] == '|')
+		return (-1);
+	else if (str[i] == '>')
+		return (-1);
+	else if (str[i] == '<')
+		return (-1);
+	return (0);
+}
 
 int	main(int ac, char **av, char **env)
 {
@@ -27,7 +50,12 @@ int	main(int ac, char **av, char **env)
 				add_history(str);
 			
 			//Check for error and return nbr of cmds
-			
+			if (check_error_parsing(str))
+			{
+				printf("minishell: syntax error near unexpected token `newline'\n");
+				free(str);
+				continue ;
+			}
 
 			// Parsing
 			cmd = malloc(sizeof(t_pars)); //Alloc nbr of cmds
