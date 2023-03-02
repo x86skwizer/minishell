@@ -6,7 +6,7 @@
 /*   By: yamrire <yamrire@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 19:08:42 by yamrire           #+#    #+#             */
-/*   Updated: 2023/03/02 01:22:56 by yamrire          ###   ########.fr       */
+/*   Updated: 2023/03/02 02:48:11 by yamrire          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ int	main(int ac, char **av, char **env)
 
 			// Parsing
 			nbr = count_cmd(str);
-			cmd = malloc(sizeof(t_pars) * nbr); //Alloc nbr of cmds
+			cmd = malloc(sizeof(t_pars)); //Alloc nbr of cmds
 			split_arg(str, &cmd); //for every cmd 
 			cmd->paths = arrange_paths(env);
 			//for every cmd
