@@ -6,7 +6,7 @@
 /*   By: yamrire <yamrire@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 19:08:42 by yamrire           #+#    #+#             */
-/*   Updated: 2023/03/01 07:21:25 by yamrire          ###   ########.fr       */
+/*   Updated: 2023/03/02 01:22:56 by yamrire          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,12 @@ int	check_error_parsing(char *str)
 		i++;
 	if (str[i] == '|')
 		return (-1);
+	while (str[i])
+	{
+		if (str[i] == '|' && str[i + 1] == '|')
+			return (-1);
+		i++;
+	}
 	i = len - 1;
 	while (str[i] == ' ')
 		i--;
@@ -35,10 +41,27 @@ int	check_error_parsing(char *str)
 	return (0);
 }
 
+int	count_cmd(char *str)
+{
+	int	i;
+	int	nbr;
+
+	i = 0;
+	nbr = 1;
+	while (str[i])
+	{
+		if (str[i] == '|')
+			nbr++;
+		i++;
+	}
+	return (nbr);
+}
+
 int	main(int ac, char **av, char **env)
 {
 	char	*str;
 	t_pars	*cmd;
+	int		nbr;
 
 	if (ac >= 1)
 	{
@@ -58,7 +81,8 @@ int	main(int ac, char **av, char **env)
 			}
 
 			// Parsing
-			cmd = malloc(sizeof(t_pars)); //Alloc nbr of cmds
+			nbr = count_cmd(str);
+			cmd = malloc(sizeof(t_pars) * nbr); //Alloc nbr of cmds
 			split_arg(str, &cmd); //for every cmd 
 			cmd->paths = arrange_paths(env);
 			//for every cmd
@@ -67,6 +91,27 @@ int	main(int ac, char **av, char **env)
 					&& ft_strcmp("unset", cmd->cmd[0]) && ft_strcmp("env", cmd->cmd[0]) 
 					&& ft_strcmp("exit", cmd->cmd[0]))
 				add_cmd_path(&cmd);
+
+
+
+			// Test multi cmd
+			// n = 0;
+			// while (n < nbr)
+			// {
+			// 	i = 0;
+			// 	printf("cmd : |%s|\n", cmd[n]->cmd[i++]);
+			// 	while (cmd[n]->cmd[i])
+			// 	{
+			// 		printf("arg (%d) : |%s| ;; ", i, cmd[n]->cmd[i]);
+			// 		i++;
+			// 	}
+			// 	printf(" ;; input (%d) : |%s|", i, cmd[n]->input);
+			// 	printf(" ;; output (%d) : |%s|", i, cmd[n]->output);
+			// 	printf(" ;; append (%d) : |%s|", i, cmd[n]->append);
+			// 	printf(" ;; delimiter (%d) : |%s|", i, cmd[n]->delimiter);
+			// 	printf("\n");
+			// 	n++;
+			// }
 			
 			// Execution
 			if (ft_strcmp("echo", cmd->cmd[0]) && ft_strcmp("cd", cmd->cmd[0])
