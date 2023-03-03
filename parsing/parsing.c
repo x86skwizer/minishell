@@ -6,7 +6,7 @@
 /*   By: yamrire <yamrire@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 01:07:47 by yamrire           #+#    #+#             */
-/*   Updated: 2023/03/03 01:13:47 by yamrire          ###   ########.fr       */
+/*   Updated: 2023/03/03 03:27:12 by yamrire          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,7 +158,6 @@ int	count_arg(char *str)
 			nbr++;
 		}
 	}
-	//return 0 if no valuable cmd
 	return (nbr);
 }
 
@@ -262,12 +261,11 @@ int	fill_cmd_list(char **env, char *str, t_list **list)
 {
 	t_pars	*cmd;
 	t_list	*new;
-	int		n;
+	int		ipip;
 
-	cmd = malloc(sizeof(t_pars)); //Alloc nbr of cmds
-	n = split_arg(str, &cmd); //for every cmd 
+	cmd = malloc(sizeof(t_pars));
+	ipip = split_arg(str, &cmd);
 	cmd->paths = arrange_paths(env);
-	//for every cmd
 	if (ft_strcmp("echo", cmd->cmd[0]) && ft_strcmp("cd", cmd->cmd[0])
 			&& ft_strcmp("pwd", cmd->cmd[0]) && ft_strcmp("export", cmd->cmd[0]) 
 			&& ft_strcmp("unset", cmd->cmd[0]) && ft_strcmp("env", cmd->cmd[0]) 
@@ -275,5 +273,5 @@ int	fill_cmd_list(char **env, char *str, t_list **list)
 		add_cmd_path(&cmd);
 	new = ft_lstnew(cmd);
 	ft_lstadd_back(list, new);
-	return (n);
+	return (ipip);
 }

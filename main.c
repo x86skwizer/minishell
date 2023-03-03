@@ -6,7 +6,7 @@
 /*   By: yamrire <yamrire@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 19:08:42 by yamrire           #+#    #+#             */
-/*   Updated: 2023/03/03 03:20:54 by yamrire          ###   ########.fr       */
+/*   Updated: 2023/03/03 03:27:29 by yamrire          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	main(int ac, char **av, char **env)
 	char	*str;
 	t_list	*list;
 	int		nbr;
-	int		n;
+	int		ipip;
 	int		i;
 
 	if (ac >= 1)
@@ -41,14 +41,15 @@ int	main(int ac, char **av, char **env)
 			// Parsing
 			nbr = count_cmd(str);
 			i = 0;
-			n = 0;
+			ipip = 0;
 			list = NULL;
 			while (i < nbr)
 			{
 				
-				n += fill_cmd_list(env, str + n, &list);
+				ipip += fill_cmd_list(env, str + ipip, &list);
 				i++;
 			}
+			
 			// Test
 			t_list	*curr;
 			curr = list;
