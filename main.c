@@ -6,7 +6,7 @@
 /*   By: yamrire <yamrire@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 19:08:42 by yamrire           #+#    #+#             */
-/*   Updated: 2023/03/03 03:27:29 by yamrire          ###   ########.fr       */
+/*   Updated: 2023/03/03 04:43:07 by yamrire          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	main(int ac, char **av, char **env)
 			//Check for error and return nbr of cmds
 			if (check_error_parsing(str))
 			{
-				printf("minishell: syntax error near unexpected token `newline'\n");
+				printf("minishell: syntax error unexpected token\n");
 				free(str);
 				continue ;
 			}
