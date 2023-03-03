@@ -6,11 +6,16 @@
 /*   By: yamrire <yamrire@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 19:08:42 by yamrire           #+#    #+#             */
-/*   Updated: 2023/03/03 04:43:07 by yamrire          ###   ########.fr       */
+/*   Updated: 2023/03/03 20:16:27 by yamrire          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
+#include "./parsing/parsing.h"
+#include <signal.h>
+
+void	handler(int num)
+{
+}
 
 int	main(int ac, char **av, char **env)
 {
@@ -19,6 +24,13 @@ int	main(int ac, char **av, char **env)
 	int		nbr;
 	int		ipip;
 	int		i;
+	struct sigaction	sa;
+
+	sa.sa_handler = handler;
+  	sigemptyset (&sa.sa_mask);
+  	sa.sa_flags = 0;
+	sigaction(SIGQUIT, &sa, NULL); //Ctrl + /
+	sigaction(SIGINT, &sa, NULL); // Ctrl + C
 
 	if (ac >= 1)
 	{
@@ -28,6 +40,11 @@ int	main(int ac, char **av, char **env)
 			str = readline("minishell$  ");
 			if (str && *str)
 				add_history(str);
+			else if (str == NULL) // Ctrl + D
+			{
+				write(1, "\n", 1);
+				continue ;
+			}
 			else
 				continue ;
 			//Check for error and return nbr of cmds

@@ -1,7 +1,7 @@
 // #include "../inc/env.h"
 // #include "../inc/minishell.h"
 
-#include "../parsing.h"
+#include "../parsing/parsing.h"
 
 int	builtin_echo(char **args)
 {

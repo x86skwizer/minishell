@@ -6,11 +6,11 @@
 /*   By: yamrire <yamrire@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 02:25:12 by yamrire           #+#    #+#             */
-/*   Updated: 2023/03/02 04:18:06 by yamrire          ###   ########.fr       */
+/*   Updated: 2023/03/03 20:06:20 by yamrire          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../parsing.h"
+#include "parsing.h"
 
 void	handle_error(int static_code)
 {
