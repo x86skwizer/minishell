@@ -6,7 +6,7 @@
 /*   By: yamrire <yamrire@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 19:08:42 by yamrire           #+#    #+#             */
-/*   Updated: 2023/03/03 01:13:16 by yamrire          ###   ########.fr       */
+/*   Updated: 2023/03/03 03:20:54 by yamrire          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	main(int ac, char **av, char **env)
 				n += fill_cmd_list(env, str + n, &list);
 				i++;
 			}
-			// Test one cmd
+			// Test
 			t_list	*curr;
 			curr = list;
 			while (curr != NULL)
