@@ -12,6 +12,8 @@ int		ft_strcmp(char *s1, char *s2);
 
 // Commun Functions in execution/minishell.h
 
+void		ft_putstr_fd(char *s, int fd);
+void		ft_putendl_fd(char *s, int fd);
 t_list		*ft_lstnew(void *content);
 int			ft_lstsize(t_list *lst);
 t_list		*ft_lstlast(t_list *lst);

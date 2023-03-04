@@ -6,7 +6,7 @@
 /*   By: yamrire <yamrire@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 19:08:42 by yamrire           #+#    #+#             */
-/*   Updated: 2023/03/04 11:23:41 by yamrire          ###   ########.fr       */
+/*   Updated: 2023/03/04 11:57:24 by yamrire          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ void	handle_signal(void)
 	sigaction(SIGINT, &sa, NULL); // Ctrl + C
 }
 
+t_merge	*my_global;
+
 int	main(int ac, char **av, char **env)
 {
 	char	*str;
@@ -35,7 +37,9 @@ int	main(int ac, char **av, char **env)
 
 	handle_signal();
 	my_global = malloc(sizeof(t_merge));
+	// Fill linked list with env variables (key, value)
 	env_fill(env);
+	// Start Program
 	if (ac >= 1)
 	{
 		av[1] = NULL;
@@ -51,7 +55,7 @@ int	main(int ac, char **av, char **env)
 			}
 			else
 				continue ;
-			//Check for error and return nbr of cmds
+			//To Do : Check for error and return nbr of cmds
 			if (check_error_parsing(str))
 			{
 				printf("minishell: syntax error unexpected token\n");
@@ -92,7 +96,8 @@ int	main(int ac, char **av, char **env)
 			while (curr)
 			{
 				t_env *env = (t_env *)curr->content;
-				printf("Key: %s\n", env->key);
+				printf("%s=", env->key);
+				printf("%s\n", env->value);
 				curr = curr->next;
 			}
 			
