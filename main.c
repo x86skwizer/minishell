@@ -6,7 +6,7 @@
 /*   By: yamrire <yamrire@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 19:08:42 by yamrire           #+#    #+#             */
-/*   Updated: 2023/03/07 04:08:18 by yamrire          ###   ########.fr       */
+/*   Updated: 2023/03/07 04:12:30 by yamrire          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	main(int ac, char **av, char **env)
 	t_list	*list;
 	t_data	data;
 
-	// Handle Signals
+	// To Do : Handle Signals
 	my_global = malloc(sizeof(t_merge));
 	env_fill(env); // Fill linked list with env variables (key, value)
 	// Start Program

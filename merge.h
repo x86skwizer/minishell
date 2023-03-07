@@ -6,14 +6,13 @@
 /*   By: yamrire <yamrire@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 05:13:04 by yamrire           #+#    #+#             */
-/*   Updated: 2023/03/07 03:57:48 by yamrire          ###   ########.fr       */
+/*   Updated: 2023/03/07 04:11:44 by yamrire          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MERGE_H
 # define MERGE_H
 
-//# include "./execution/minishell.h"
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
@@ -84,9 +83,11 @@ void	ft_putstr_fd(char *s, int fd);
 int		check_error_parsing(char *str);
 int		count_cmd(char *str);
 int		fill_cmd_list(char **env, char *str, t_list **list);
+
+// env
 void	env_fill(char **envp);
 
-//builtins
+// builtins
 void	builtin_echo(char **args);
 void	builtin_cd(char **args);
 void	builtin_pwd(void);
