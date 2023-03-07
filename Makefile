@@ -16,7 +16,7 @@ SRC = main.c ./parsing/parsing.c ./parsing//utils/ft_split.c ./parsing/utils/ft_
 	./execution/builtins/cd.c ./execution/builtins/echo.c ./execution/builtins/pwd.c ./execution/utils/libft_str.c ./execution/utils/search.c
 NAME = minishell
 CC = cc
-FLAGS =  -lreadline #-Wall -Werror -Wextra #-fsanitize=address -g3
+FLAGS =  -lreadline -Wall -Werror -Wextra #-fsanitize=address -g3
 OBJ = $(SRC:%.c=%.o)
 
 all : $(NAME) $(OBJ)
