@@ -6,11 +6,11 @@
 /*   By: yamrire <yamrire@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 02:36:45 by yamrire           #+#    #+#             */
-/*   Updated: 2023/03/01 00:19:36 by yamrire          ###   ########.fr       */
+/*   Updated: 2023/03/07 02:51:32 by yamrire          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../parsing.h"
+#include "../../merge.h"
 
 char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 {

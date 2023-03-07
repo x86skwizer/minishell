@@ -1,6 +1,7 @@
 #include "../minishell.h"
+#include "../../merge.h"
 
-int builtin_cd(char **args)
+void builtin_cd(char **args)
 {
 	char	*old_path;
 	char	*new_path;
@@ -22,18 +23,18 @@ int builtin_cd(char **args)
 		ft_putstr_fd("cd: ", STDERR_FILENO);
 		ft_putstr_fd(new_path, STDERR_FILENO);
 		ft_putendl_fd(" no such file or directory", STDERR_FILENO);
-		return (1);
+		return ;
 	}
 	old_path = getcwd(NULL, 0);
-	return (ret);
+	return ;
 }
 
-int main(int argc, char **argv, char **envp)
-{
+// int main(int argc, char **argv, char **envp)
+// {
     // char s[100];
 
-	(void)argc;
-	(void)envp;
+	// (void)argc;
+	// (void)envp;
 
 	// for (int i = 0; envp[i]; i++)
 	// {
@@ -41,11 +42,11 @@ int main(int argc, char **argv, char **envp)
 	// }
     //Printing the current working directory
     // printf("%d\n",builtin_cd(argv));
-	builtin_cd(argv);
+	// builtin_cd(argv);
     //Changing the current working directory to the previous directory
     // chdir("..");
     //Printing the now current working directory
 	// builtin_cd(argv);
     // printf("%d\n",builtin_cd(argv));
-    return 0;
-}
+//     return 0;
+// }

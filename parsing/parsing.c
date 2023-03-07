@@ -6,11 +6,10 @@
 /*   By: yamrire <yamrire@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 01:07:47 by yamrire           #+#    #+#             */
-/*   Updated: 2023/03/04 10:12:08 by yamrire          ###   ########.fr       */
+/*   Updated: 2023/03/07 02:54:05 by yamrire          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
 #include "../merge.h"
 
 char	**get_paths(char **envp)
@@ -258,10 +257,10 @@ int	split_arg(char *str, t_pars **cmd)
 	return (0);
 }
 
-int	fill_cmd_list(char **env, char *str, t_listp **list)
+int	fill_cmd_list(char **env, char *str, t_list **list)
 {
 	t_pars	*cmd;
-	t_listp	*new;
+	t_list	*new;
 	int		ipip;
 
 	cmd = malloc(sizeof(t_pars));
@@ -272,7 +271,7 @@ int	fill_cmd_list(char **env, char *str, t_listp **list)
 			&& ft_strcmp("unset", cmd->cmd[0]) && ft_strcmp("env", cmd->cmd[0]) 
 			&& ft_strcmp("exit", cmd->cmd[0]))
 		add_cmd_path(&cmd);
-	new = ft_lstnew_cmd(cmd);
-	ft_lstaddback_cmd(list, new);
+	new = ft_lstnew(cmd);
+	ft_lstadd_back(list, new);
 	return (ipip);
 }

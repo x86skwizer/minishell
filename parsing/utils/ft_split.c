@@ -6,11 +6,11 @@
 /*   By: yamrire <yamrire@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 23:48:54 by yamrire           #+#    #+#             */
-/*   Updated: 2023/03/01 00:19:05 by yamrire          ###   ########.fr       */
+/*   Updated: 2023/03/07 02:52:26 by yamrire          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../parsing.h"
+#include "../../merge.h"
 
 int	count_words(char const *src, char c)
 {

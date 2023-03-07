@@ -6,11 +6,11 @@
 /*   By: yamrire <yamrire@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 01:09:28 by yamrire           #+#    #+#             */
-/*   Updated: 2023/03/01 01:27:29 by yamrire          ###   ########.fr       */
+/*   Updated: 2023/03/07 02:52:02 by yamrire          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../parsing.h"
+#include "../../merge.h"
 
 int	ft_strcmp(char *s1, char *s2)
 {

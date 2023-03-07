@@ -1,25 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstnew_cmd.c                                    :+:      :+:    :+:   */
+/*   ft_lstlast.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yamrire <yamrire@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/07 19:16:10 by yamrire           #+#    #+#             */
-/*   Updated: 2023/03/04 04:53:22 by yamrire          ###   ########.fr       */
+/*   Created: 2022/10/09 05:16:19 by yamrire           #+#    #+#             */
+/*   Updated: 2023/03/07 02:52:45 by yamrire          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../parsing.h"
+#include "../../merge.h"
 
-t_listp	*ft_lstnew_cmd(t_pars *cmd)
+t_list	*ft_lstlast(t_list *lst)
 {
-	t_listp	*new_elem;
+	t_list	*curr;
+	t_list	*aux;
 
-	new_elem = malloc(sizeof(t_listp));
-	if (new_elem == NULL)
+	curr = lst;
+	if (curr == NULL)
 		return (NULL);
-	new_elem->cmd = cmd;
-	new_elem->next = NULL;
-	return (new_elem);
+	while (curr != NULL)
+	{
+		aux = curr;
+		curr = curr->next;
+	}
+	return (aux);
+	
 }
