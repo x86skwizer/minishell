@@ -6,7 +6,7 @@
 /*   By: yamrire <yamrire@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 19:08:42 by yamrire           #+#    #+#             */
-/*   Updated: 2023/03/07 04:01:54 by yamrire          ###   ########.fr       */
+/*   Updated: 2023/03/07 04:08:18 by yamrire          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,25 +64,6 @@ int	main(int ac, char **av, char **env)
 				data.ipip += fill_cmd_list(env, str + data.ipip, &list);
 				data.i++;
 			}
-			// Test
-			// t_listp	*curr;
-			// curr = list;
-			// int i = 0;
-			// while (curr != NULL)
-			// {
-			// 	i = 0;
-			// 	while (curr->cmd->cmd[i] != NULL)
-			// 	{
-			// 		printf("arg (%d) : |%s|\n", i, curr->cmd->cmd[i]);
-			// 		i++;
-			// 	}
-			// 	printf("input  : |%s|\n", curr->cmd->input);
-			// 	printf("output : |%s|\n", curr->cmd->output);
-			// 	printf("append : |%s|\n", curr->cmd->append);
-			// 	printf("delimiter : |%s|\n", curr->cmd->delimiter);
-			// 	curr = curr->next;
-			// }
-
 			
 			// Execution (one cmd)
 			t_list	*curr = list;
