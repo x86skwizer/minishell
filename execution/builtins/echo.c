@@ -18,9 +18,3 @@ void	builtin_echo(char **args)
 	if (args[1] && ft_strcmp(args[1], "-n"))
 		ft_putstr_fd("\n", 1);
 }
-
-// int main(int argc, char **argv)
-// {
-// 	builtins_echo(argv);
-// 	return (0);
-// }

@@ -6,7 +6,7 @@
 /*   By: yamrire <yamrire@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 19:08:42 by yamrire           #+#    #+#             */
-/*   Updated: 2023/03/07 03:38:40 by yamrire          ###   ########.fr       */
+/*   Updated: 2023/03/07 04:01:54 by yamrire          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,20 +105,13 @@ int	main(int ac, char **av, char **env)
 				free(str);
 			}
 			else if (!ft_strcmp("echo", cmd->cmd[0]))
-			{
-				printf("Executing echo...\n");
 				builtin_echo(cmd->cmd);
-			}
 			else if (!ft_strcmp("cd", cmd->cmd[0]))
-			{
-				printf("Executing cd...\n");
 				builtin_cd(cmd->cmd);
-			}
 			else if (!ft_strcmp("pwd", cmd->cmd[0]))
-			{
-				printf("Executing echo...\n");
 				builtin_pwd();
-			}
+			else if (!ft_strcmp("env", cmd->cmd[0]))
+				builtin_env();
 			else
 				printf("Found it!\n");
 		}

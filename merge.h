@@ -6,7 +6,7 @@
 /*   By: yamrire <yamrire@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 05:13:04 by yamrire           #+#    #+#             */
-/*   Updated: 2023/03/07 03:27:35 by yamrire          ###   ########.fr       */
+/*   Updated: 2023/03/07 03:57:48 by yamrire          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ typedef	struct s_merge
 
 extern t_merge	*my_global;
 
-void	env_fill(char **envp);
 char	**arrange_paths(char **envp);
 char	**get_paths(char **envp);
 void	free_double(char **pointer);
@@ -85,6 +84,7 @@ void	ft_putstr_fd(char *s, int fd);
 int		check_error_parsing(char *str);
 int		count_cmd(char *str);
 int		fill_cmd_list(char **env, char *str, t_list **list);
+void	env_fill(char **envp);
 
 //builtins
 void	builtin_echo(char **args);

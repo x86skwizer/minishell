@@ -5,7 +5,6 @@ void builtin_cd(char **args)
 {
 	char	*old_path;
 	char	*new_path;
-	// t_env	*env;
 	int		ret;
 
 	old_path = getcwd(NULL, 0);
@@ -17,7 +16,6 @@ void builtin_cd(char **args)
 	search_replace("OLDPWD", old_path);
 	search_replace("PWD", new_path);
 	ret = chdir(new_path);
-	printf("%s\n",new_path);
 	if (ret < 0)
 	{
 		ft_putstr_fd("cd: ", STDERR_FILENO);
@@ -28,25 +26,3 @@ void builtin_cd(char **args)
 	old_path = getcwd(NULL, 0);
 	return ;
 }
-
-// int main(int argc, char **argv, char **envp)
-// {
-    // char s[100];
-
-	// (void)argc;
-	// (void)envp;
-
-	// for (int i = 0; envp[i]; i++)
-	// {
-	// 	printf("%s\n",envp[i]);
-	// }
-    //Printing the current working directory
-    // printf("%d\n",builtin_cd(argv));
-	// builtin_cd(argv);
-    //Changing the current working directory to the previous directory
-    // chdir("..");
-    //Printing the now current working directory
-	// builtin_cd(argv);
-    // printf("%d\n",builtin_cd(argv));
-//     return 0;
-// }
