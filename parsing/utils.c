@@ -6,7 +6,7 @@
 /*   By: yamrire <yamrire@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 02:25:12 by yamrire           #+#    #+#             */
-/*   Updated: 2023/03/07 02:49:46 by yamrire          ###   ########.fr       */
+/*   Updated: 2023/03/09 06:20:46 by yamrire          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,18 @@ int	count_cmd(char *str)
 	nbr = 1;
 	while (str[i])
 	{
+		if(str[i] == 34) // "
+		{
+			i++;
+			while (str[i] && str[i] != 34)
+				i++;
+		}
+		else if(str[i] == 39) // '
+		{
+			i++;
+			while (str[i] && str[i] != 39)
+				i++;
+		}
 		if (str[i] == '|')
 			nbr++;
 		i++;
