@@ -6,7 +6,7 @@
 /*   By: yamrire <yamrire@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 01:07:47 by yamrire           #+#    #+#             */
-/*   Updated: 2023/03/08 07:59:17 by yamrire          ###   ########.fr       */
+/*   Updated: 2023/03/09 07:54:28 by yamrire          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,8 @@ int	split_arg(char *str, t_pars **cmd)
 			while (str[i] && str[i] != 34)
 				i++;
 			(*cmd)->cmd[j] = ft_substr(str, start, i - start);
+			while (check_expansion((*cmd)->cmd[j]))
+				expand_arg((&(*cmd)->cmd[j]));
 			j++;
 			i++;
 		}
@@ -172,6 +174,8 @@ int	split_arg(char *str, t_pars **cmd)
 			while (str[i] && str[i] != ' ' && str[i] != '|')
 				i++;
 			(*cmd)->cmd[j] = ft_substr(str, start, i - start);
+			while (check_expansion((*cmd)->cmd[j]))
+				expand_arg((&(*cmd)->cmd[j]));
 			j++;
 		}
 	}

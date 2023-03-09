@@ -6,7 +6,7 @@
 /*   By: yamrire <yamrire@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 05:13:04 by yamrire           #+#    #+#             */
-/*   Updated: 2023/03/09 06:33:00 by yamrire          ###   ########.fr       */
+/*   Updated: 2023/03/09 07:55:27 by yamrire          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,10 @@ void	ft_putstr_fd(char *s, int fd);
 int		check_error_parsing(char *str);
 int		count_cmd(char *str);
 int		fill_cmd_list(char **env, char *str, t_list **list);
-
+int		check_expansion(char *cmd);
+int		check_env_var(char *s);
+void	expand(char **s);
+void	expand_arg(char **arg);
 // env
 void	env_fill(char **envp);
 
