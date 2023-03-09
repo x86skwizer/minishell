@@ -6,7 +6,7 @@
 /*   By: yamrire <yamrire@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 05:13:04 by yamrire           #+#    #+#             */
-/*   Updated: 2023/03/07 04:11:44 by yamrire          ###   ########.fr       */
+/*   Updated: 2023/03/09 06:33:00 by yamrire          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,5 +91,6 @@ void	env_fill(char **envp);
 void	builtin_echo(char **args);
 void	builtin_cd(char **args);
 void	builtin_pwd(void);
+void	builtin_env(void);
 
 #endif

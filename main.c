@@ -6,27 +6,13 @@
 /*   By: yamrire <yamrire@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 19:08:42 by yamrire           #+#    #+#             */
-/*   Updated: 2023/03/07 04:12:30 by yamrire          ###   ########.fr       */
+/*   Updated: 2023/03/09 06:30:30 by yamrire          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "merge.h"
 
 t_merge	*my_global;
-
-void	builtin_env(void)
-{
-	t_list	*curr;
-
-	curr = my_global->env;
-	while (curr)
-	{
-		t_env *env = (t_env *)curr->content;
-		printf("%s=", env->key);
-		printf("%s\n", env->value);
-		curr = curr->next;
-	}
-}
 
 int	main(int ac, char **av, char **env)
 {
