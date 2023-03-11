@@ -6,7 +6,7 @@
 /*   By: yamrire <yamrire@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 19:08:42 by yamrire           #+#    #+#             */
-/*   Updated: 2023/03/09 06:30:30 by yamrire          ###   ########.fr       */
+/*   Updated: 2023/03/11 05:08:56 by yamrire          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,36 +51,55 @@ int	main(int ac, char **av, char **env)
 				data.i++;
 			}
 			
-			// Execution (one cmd)
+			// Test Parsing
 			t_list	*curr = list;
-			t_pars *cmd = (t_pars *)curr->content;
-			if (ft_strcmp("echo", cmd->cmd[0]) && ft_strcmp("cd", cmd->cmd[0])
-					&& ft_strcmp("pwd", cmd->cmd[0]) && ft_strcmp("export", cmd->cmd[0]) 
-					&& ft_strcmp("unset", cmd->cmd[0]) && ft_strcmp("env", cmd->cmd[0]) 
-					&& ft_strcmp("exit", cmd->cmd[0]))
+			while (curr)
 			{
-				cmd->pid = fork();
-				if (cmd->pid == -1)
-					handle_error(errno);
-				else if (cmd->pid == 0)
+				t_pars *cmd = (t_pars *)curr->content;
+				int	i = 0;
+				printf("cmd : %s\n", cmd->cmd[i++]);
+				while (cmd->cmd[i])
 				{
-					if (execve(cmd->cmd[0], cmd->cmd, env) == -1)
-						handle_error(errno);
+					printf("arg (%d) : %s\n",i, cmd->cmd[i]);
+					i++;
 				}
-				wait(NULL);
-				free_double(cmd->cmd);
-				free(str);
+				printf("input : %s\n", cmd->input);
+				printf("output : %s\n", cmd->output);
+				printf("append : %s\n", cmd->append);
+				printf("delimiter : %s\n", cmd->delimiter);
+				printf("================================\n");
+				curr = curr->next;
 			}
-			else if (!ft_strcmp("echo", cmd->cmd[0]))
-				builtin_echo(cmd->cmd);
-			else if (!ft_strcmp("cd", cmd->cmd[0]))
-				builtin_cd(cmd->cmd);
-			else if (!ft_strcmp("pwd", cmd->cmd[0]))
-				builtin_pwd();
-			else if (!ft_strcmp("env", cmd->cmd[0]))
-				builtin_env();
-			else
-				printf("Found it!\n");
+			// Execute first cmd
+			// t_list	*curr = list;
+			// t_pars *cmd = (t_pars *)curr->content;
+			// if (ft_strcmp("echo", cmd->cmd[0]) && ft_strcmp("cd", cmd->cmd[0])
+			// 		&& ft_strcmp("pwd", cmd->cmd[0]) && ft_strcmp("export", cmd->cmd[0]) 
+			// 		&& ft_strcmp("unset", cmd->cmd[0]) && ft_strcmp("env", cmd->cmd[0]) 
+			// 		&& ft_strcmp("exit", cmd->cmd[0]))
+			// {
+			// 	cmd->pid = fork();
+			// 	if (cmd->pid == -1)
+			// 		handle_error(errno);
+			// 	else if (cmd->pid == 0)
+			// 	{
+			// 		if (execve(cmd->cmd[0], cmd->cmd, env) == -1)
+			// 			handle_error(errno);
+			// 	}
+			// 	wait(NULL);
+			// 	free_double(cmd->cmd);
+			// 	free(str);
+			// }
+			// else if (!ft_strcmp("echo", cmd->cmd[0]))
+			// 	builtin_echo(cmd->cmd);
+			// else if (!ft_strcmp("cd", cmd->cmd[0]))
+			// 	builtin_cd(cmd->cmd);
+			// else if (!ft_strcmp("pwd", cmd->cmd[0]))
+			// 	builtin_pwd();
+			// else if (!ft_strcmp("env", cmd->cmd[0]))
+			// 	builtin_env();
+			// else
+			// 	printf("Found it!\n");
 		}
 	}
 	return (0);
