@@ -6,7 +6,7 @@
 /*   By: yamrire <yamrire@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 05:13:04 by yamrire           #+#    #+#             */
-/*   Updated: 2023/03/09 07:55:27 by yamrire          ###   ########.fr       */
+/*   Updated: 2023/03/11 05:29:14 by yamrire          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,25 +31,28 @@ typedef struct s_list
 
 typedef struct s_env
 {
-	char			*key;
-	char			*value;
+	char	*key;
+	char	*value;
 }					t_env;
 
 typedef struct s_data {
-	int		nbr;
-	int		ipip;
-	int		i;
+	int	nbr;
+	int	ipip;
+	int	i;
 }	t_data;
 
 typedef struct s_pars
 {
-	char			**cmd;
-	char			**paths;
-	char			*input;
-	char			*output;
-	char			*append;
-	char			*delimiter;
-	pid_t			pid;
+	char	**cmd;
+	char	**paths;
+	char	*input;
+	char	*output;
+	char	*append;
+	char	*delimiter;
+	int		fd_input;
+	int		fd_output;
+	int		fd_append;	
+	pid_t	pid;
 }	t_pars;
 
 typedef	struct s_merge
