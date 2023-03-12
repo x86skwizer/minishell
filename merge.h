@@ -6,7 +6,7 @@
 /*   By: yamrire <yamrire@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 05:13:04 by yamrire           #+#    #+#             */
-/*   Updated: 2023/03/11 05:29:14 by yamrire          ###   ########.fr       */
+/*   Updated: 2023/03/12 01:42:59 by yamrire          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,8 @@ typedef struct s_pars
 	int		fd_input;
 	int		fd_output;
 	int		fd_append;	
-	pid_t	pid;
+	pid_t	*pid;
+	int		fd_pip[2];
 }	t_pars;
 
 typedef	struct s_merge
@@ -98,5 +99,8 @@ void	builtin_echo(char **args);
 void	builtin_cd(char **args);
 void	builtin_pwd(void);
 void	builtin_env(void);
+
+//execution
+void	execute(t_list *list, char *str, char **env, int i);
 
 #endif

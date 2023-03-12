@@ -6,7 +6,7 @@
 /*   By: yamrire <yamrire@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 01:07:47 by yamrire           #+#    #+#             */
-/*   Updated: 2023/03/11 05:45:33 by yamrire          ###   ########.fr       */
+/*   Updated: 2023/03/12 00:39:06 by yamrire          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ int	count_arg(char *str)
 					i++;
 			}
 		}
-		else if (str[i] && str[i] != ' '&& str[i] != '|')
+		else if (str[i] && str[i] != ' ' && str[i] != '|')
 		{
 			while (str[i] && str[i] != ' ' && str[i] != '|') // if !str[i] print error
 				i++;
