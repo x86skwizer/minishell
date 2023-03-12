@@ -6,7 +6,7 @@
 /*   By: yamrire <yamrire@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 19:08:42 by yamrire           #+#    #+#             */
-/*   Updated: 2023/03/12 01:18:42 by yamrire          ###   ########.fr       */
+/*   Updated: 2023/03/12 02:03:10 by yamrire          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int	main(int ac, char **av, char **env)
 	if (ac >= 1)
 	{
 		av[1] = NULL;
+		my_global->exit_code = 0;
 		while (1)
 		{
 			str = readline("minishell$  ");
@@ -34,7 +35,8 @@ int	main(int ac, char **av, char **env)
 				add_history(str);
 			else
 				continue ;
-			if (check_error_parsing(str))
+			my_global->exit_code = check_error_parsing(str);
+			if (my_global->exit_code)
 			{
 				printf("minishell: syntax error unexpected token\n");
 				free(str);
