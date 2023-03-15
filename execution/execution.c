@@ -16,12 +16,6 @@ void	execute_builtins(char **cmd)
 
 void	execute_one_cmd(t_pars *cmd, char **env, int i)
 {
-	
-	// if (ft_strcmp("echo", cmd->cmd[0]) && ft_strcmp("cd", cmd->cmd[0])
-	// 		&& ft_strcmp("pwd", cmd->cmd[0]) && ft_strcmp("export", cmd->cmd[0]) 
-	// 		&& ft_strcmp("unset", cmd->cmd[0]) && ft_strcmp("env", cmd->cmd[0]) 
-	// 		&& ft_strcmp("exit", cmd->cmd[0]))
-	// {
 			if (i == 0)
 			{
 				if (cmd->input)
@@ -62,11 +56,13 @@ void	execute_one_cmd(t_pars *cmd, char **env, int i)
 				close(my_global->fd_tmp);
 				close(my_global->fd_pip[1]);
 			}
-			execve(cmd->cmd[0], cmd->cmd, env);
-		
-	// }
-	// else
-	// 	execute_builtins(cmd->cmd);
+			if (ft_strcmp("echo", cmd->cmd[0]) && ft_strcmp("cd", cmd->cmd[0])
+					&& ft_strcmp("pwd", cmd->cmd[0]) && ft_strcmp("export", cmd->cmd[0]) 
+					&& ft_strcmp("unset", cmd->cmd[0]) && ft_strcmp("env", cmd->cmd[0]) 
+					&& ft_strcmp("exit", cmd->cmd[0]))
+				execve(cmd->cmd[0], cmd->cmd, env);
+			// else
+				// execute_builtins(cmd->cmd);
 }
 
 void	execute(t_list *list, char **env)
