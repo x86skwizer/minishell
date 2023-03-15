@@ -23,7 +23,7 @@ void	env_fill(char **envp)
 	{
 		pointer = ft_split(envp[i], '=');
 		env_node = env_create(pointer[0], pointer[1]);
-		ft_lstadd_back(&my_global->env, ft_lstnew(env_node));
+		ft_lstadd_back(&(my_global->env), ft_lstnew(env_node));
 		i++;
 	}
 }

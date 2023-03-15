@@ -6,7 +6,7 @@
 /*   By: yamrire <yamrire@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 19:08:42 by yamrire           #+#    #+#             */
-/*   Updated: 2023/03/12 02:03:10 by yamrire          ###   ########.fr       */
+/*   Updated: 2023/03/15 06:51:23 by yamrire          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ int	main(int ac, char **av, char **env)
 
 	// To Do : Handle Signals
 	my_global = malloc(sizeof(t_merge));
+	my_global->env = malloc(sizeof(t_list));
 	env_fill(env); // Fill linked list with env variables (key, value)
 	// Start Program
 	if (ac >= 1)
@@ -46,13 +47,16 @@ int	main(int ac, char **av, char **env)
 			data.i = 0;
 			data.ipip = 0;
 			list = NULL;
-			data.nbr = count_cmd(str);
-			while (data.i < data.nbr)
+			my_global->nbr_cmd = count_cmd(str);
+			while (data.i < my_global->nbr_cmd)
 			{
 				data.ipip += fill_cmd_list(env, str + data.ipip, &list);
 				data.i++;
 			}
 			
+			// Execute first cmd
+			execute(list, env);
+
 			// Test Parsing
 			// t_list	*curr = list;
 			// while (curr)
@@ -72,9 +76,6 @@ int	main(int ac, char **av, char **env)
 			// 	printf("================================\n");
 			// 	curr = curr->next;
 			// }
-	
-			// Execute first cmd
-			execute(list, str, env, data.nbr);
 		}
 	}
 	return (0);

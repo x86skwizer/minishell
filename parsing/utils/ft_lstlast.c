@@ -6,7 +6,7 @@
 /*   By: yamrire <yamrire@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/09 05:16:19 by yamrire           #+#    #+#             */
-/*   Updated: 2023/03/07 02:52:45 by yamrire          ###   ########.fr       */
+/*   Updated: 2023/03/14 07:59:10 by yamrire          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,4 @@ t_list	*ft_lstlast(t_list *lst)
 		curr = curr->next;
 	}
 	return (aux);
-	
 }

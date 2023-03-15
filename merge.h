@@ -6,7 +6,7 @@
 /*   By: yamrire <yamrire@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 05:13:04 by yamrire           #+#    #+#             */
-/*   Updated: 2023/03/12 01:42:59 by yamrire          ###   ########.fr       */
+/*   Updated: 2023/03/14 08:28:21 by yamrire          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ typedef struct s_env
 }					t_env;
 
 typedef struct s_data {
-	int	nbr;
 	int	ipip;
 	int	i;
 }	t_data;
@@ -52,15 +51,17 @@ typedef struct s_pars
 	int		fd_input;
 	int		fd_output;
 	int		fd_append;	
-	pid_t	*pid;
-	int		fd_pip[2];
 }	t_pars;
 
 typedef	struct s_merge
 {
-	t_list		*env;
-	int			exit_code;
-}				t_merge;
+	t_list	*env;
+	pid_t	*pid;
+	int		fd_pip[2];
+	int		fd_tmp;
+	int		nbr_cmd;
+	int		exit_code;
+}	t_merge;
 
 extern t_merge	*my_global;
 
@@ -101,6 +102,6 @@ void	builtin_pwd(void);
 void	builtin_env(void);
 
 //execution
-void	execute(t_list *list, char *str, char **env, int i);
+void	execute(t_list *list, char **env);
 
 #endif
