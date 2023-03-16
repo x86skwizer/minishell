@@ -1,7 +1,7 @@
 #include "../minishell.h"
 #include "../../merge.h"
 
-void builtin_cd(char **args)
+int builtin_cd(char **args)
 {
 	char	*old_path;
 	char	*new_path;
@@ -21,8 +21,8 @@ void builtin_cd(char **args)
 		ft_putstr_fd("cd: ", STDERR_FILENO);
 		ft_putstr_fd(new_path, STDERR_FILENO);
 		ft_putendl_fd(" no such file or directory", STDERR_FILENO);
-		return ;
+		return (1);
 	}
 	old_path = getcwd(NULL, 0);
-	return ;
+	return (ret);
 }

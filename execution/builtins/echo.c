@@ -1,7 +1,7 @@
 #include "../minishell.h"
 #include "../../merge.h"
 
-void	builtin_echo(char **args)
+int	builtin_echo(char **args)
 {
 	int	i;
 
@@ -17,4 +17,5 @@ void	builtin_echo(char **args)
 	}
 	if (args[1] && ft_strcmp(args[1], "-n"))
 		ft_putstr_fd("\n", 1);
+	return (0);
 }

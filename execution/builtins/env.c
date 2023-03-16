@@ -1,7 +1,7 @@
 #include "../minishell.h"
 #include "../../merge.h"
 
-void	builtin_env(void)
+int	builtin_env(void)
 {
 	t_list		*tmp;
 	t_env		*tmp_content;
@@ -16,4 +16,5 @@ void	builtin_env(void)
 		tmp = tmp->next;
 	}
 	free(tmp);
+	return (0);
 }
