@@ -12,6 +12,7 @@ void	execute_builtins(char **cmd)
 		builtin_env();
 	else
 		printf("Found undone builtin function !\n");
+	exit(my_global->exit_code);
 }
 
 void	execute_one_cmd(t_pars *cmd, char **env, int i)
