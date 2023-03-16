@@ -10,8 +10,12 @@ void	execute_builtins(char **cmd)
 		my_global->exit_code = builtin_pwd();
 	else if (!ft_strcmp("env", cmd[0]))
 		my_global->exit_code = builtin_env();
-	else
-		printf("Found undone builtin function !\n");
+	else if (!ft_strcmp("export", cmd[0]))
+		my_global->exit_code = builtin_export(cmd);
+	else if (!ft_strcmp("unset", cmd[0]))
+		my_global->exit_code = builtin_unset(cmd);
+	else if (!ft_strcmp("exit", cmd[0]))
+		my_global->exit_code = builtin_exit(cmd);
 	exit(my_global->exit_code);
 }
 

@@ -6,13 +6,33 @@
 /*   By: yamrire <yamrire@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 19:08:42 by yamrire           #+#    #+#             */
-/*   Updated: 2023/03/16 07:14:58 by yamrire          ###   ########.fr       */
+/*   Updated: 2023/03/16 18:31:53 by yamrire          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "merge.h"
+#include <readline/readline.h>
+#include <readline/history.h>
 
 t_merge	*my_global;
+
+// void	int_handler(int sig)
+// {
+// 	(void)sig;
+// 	printf("\n");
+// 	rl_on_new_line();
+// 	rl_replace_line("", 0);
+// 	rl_redisplay();
+// 	my_global->exit_code  = 1;
+
+// }
+
+// void	quit_handler(int sig)
+// {
+// 	(void)sig;
+// 	rl_on_new_line();
+// 	rl_redisplay();
+// }
 
 int	main(int ac, char **av, char **env)
 {
@@ -20,6 +40,8 @@ int	main(int ac, char **av, char **env)
 	t_list	*list;
 	t_data	data;
 
+	// signal(SIGINT, int_handler);
+	// signal(SIGQUIT, quit_handler);
 	my_global = malloc(sizeof(t_merge));
 	my_global->env = malloc(sizeof(t_list));
 	env_fill(env);

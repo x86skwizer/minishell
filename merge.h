@@ -6,7 +6,7 @@
 /*   By: yamrire <yamrire@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 05:13:04 by yamrire           #+#    #+#             */
-/*   Updated: 2023/03/16 12:17:07 by yamrire          ###   ########.fr       */
+/*   Updated: 2023/03/16 18:08:00 by yamrire          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,6 @@
 # include <signal.h>
 # include <sys/wait.h>
 # include <sys/errno.h>
-# include <readline/readline.h>
-# include <readline/history.h>
 
 typedef struct s_list
 {
@@ -102,6 +100,10 @@ int		builtin_echo(char **args);
 int		builtin_cd(char **args);
 int 	builtin_pwd(void);
 int		builtin_env(void);
+int		builtin_export(char **argv);
+int		builtin_unset( char **args);
+int		builtin_exit(char **args);
+void	rl_replace_line(const char *test, int flag);
 
 //execution
 void	execute(t_list *list, char **env);
