@@ -6,7 +6,7 @@
 /*   By: yamrire <yamrire@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 19:08:42 by yamrire           #+#    #+#             */
-/*   Updated: 2023/03/15 06:51:23 by yamrire          ###   ########.fr       */
+/*   Updated: 2023/03/16 07:14:58 by yamrire          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,9 @@ int	main(int ac, char **av, char **env)
 	t_list	*list;
 	t_data	data;
 
-	// To Do : Handle Signals
 	my_global = malloc(sizeof(t_merge));
 	my_global->env = malloc(sizeof(t_list));
-	env_fill(env); // Fill linked list with env variables (key, value)
-	// Start Program
+	env_fill(env);
 	if (ac >= 1)
 	{
 		av[1] = NULL;
@@ -43,7 +41,6 @@ int	main(int ac, char **av, char **env)
 				free(str);
 				continue ;
 			}
-			// Parsing
 			data.i = 0;
 			data.ipip = 0;
 			list = NULL;
@@ -53,29 +50,7 @@ int	main(int ac, char **av, char **env)
 				data.ipip += fill_cmd_list(env, str + data.ipip, &list);
 				data.i++;
 			}
-			
-			// Execute first cmd
 			execute(list, env);
-
-			// Test Parsing
-			// t_list	*curr = list;
-			// while (curr)
-			// {
-			// 	t_pars *cmd = (t_pars *)curr->content;
-			// 	int	i = 0;
-			// 	printf("cmd : %s\n", cmd->cmd[i++]);
-			// 	while (cmd->cmd[i])
-			// 	{
-			// 		printf("arg (%d) : %s\n",i, cmd->cmd[i]);
-			// 		i++;
-			// 	}
-			// 	printf("input : %s\n", cmd->input);
-			// 	printf("output : %s\n", cmd->output);
-			// 	printf("append : %s\n", cmd->append);
-			// 	printf("delimiter : %s\n", cmd->delimiter);
-			// 	printf("================================\n");
-			// 	curr = curr->next;
-			// }
 		}
 	}
 	return (0);
