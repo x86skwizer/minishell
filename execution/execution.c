@@ -61,8 +61,8 @@ void	execute_one_cmd(t_pars *cmd, char **env, int i)
 					&& ft_strcmp("unset", cmd->cmd[0]) && ft_strcmp("env", cmd->cmd[0]) 
 					&& ft_strcmp("exit", cmd->cmd[0]))
 				execve(cmd->cmd[0], cmd->cmd, env);
-			// else
-				// execute_builtins(cmd->cmd);
+			 else
+				execute_builtins(cmd->cmd);
 }
 
 void	execute(t_list *list, char **env)
