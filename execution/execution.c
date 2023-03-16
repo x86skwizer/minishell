@@ -3,13 +3,13 @@
 void	execute_builtins(char **cmd)
 {
 	if (!ft_strcmp("echo", cmd[0]))
-		builtin_echo(cmd);
+		my_global->exit_code = builtin_echo(cmd);
 	else if (!ft_strcmp("cd", cmd[0]))
-		builtin_cd(cmd);
+		my_global->exit_code = builtin_cd(cmd);
 	else if (!ft_strcmp("pwd", cmd[0]))
-		builtin_pwd();
+		my_global->exit_code = builtin_pwd();
 	else if (!ft_strcmp("env", cmd[0]))
-		builtin_env();
+		my_global->exit_code = builtin_env();
 	else
 		printf("Found undone builtin function !\n");
 	exit(my_global->exit_code);

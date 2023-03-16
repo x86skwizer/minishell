@@ -6,7 +6,7 @@
 /*   By: yamrire <yamrire@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 05:13:04 by yamrire           #+#    #+#             */
-/*   Updated: 2023/03/16 06:50:35 by yamrire          ###   ########.fr       */
+/*   Updated: 2023/03/16 12:17:07 by yamrire          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,8 @@ typedef struct s_pars
 	char	*delimiter;
 	int		fd_input;
 	int		fd_output;
-	int		fd_append;	
+	int		fd_append;
+	int		fd_hdoc;
 }	t_pars;
 
 typedef	struct s_merge
@@ -97,10 +98,10 @@ void	expand_arg(char **arg);
 void	env_fill(char **envp);
 
 // builtins
-void	builtin_echo(char **args);
-void	builtin_cd(char **args);
-void	builtin_pwd(void);
-void	builtin_env(void);
+int		builtin_echo(char **args);
+int		builtin_cd(char **args);
+int 	builtin_pwd(void);
+int		builtin_env(void);
 
 //execution
 void	execute(t_list *list, char **env);
