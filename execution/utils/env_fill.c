@@ -19,6 +19,7 @@ void	env_fill(char **envp)
 	int		i;
 
 	i = 0;
+	my_global->env = NULL;
 	while (envp[i])
 	{
 		pointer = ft_split(envp[i], '=');
