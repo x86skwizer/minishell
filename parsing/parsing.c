@@ -6,7 +6,7 @@
 /*   By: yamrire <yamrire@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 01:07:47 by yamrire           #+#    #+#             */
-/*   Updated: 2023/03/12 00:39:06 by yamrire          ###   ########.fr       */
+/*   Updated: 2023/03/16 12:02:15 by yamrire          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,7 +170,13 @@ int	split_arg(char *str, t_pars **cmd)
 					i++;
 				if ((*cmd)->delimiter)
 					free((*cmd)->delimiter);
+				// if ((*cmd)->delimiter)
+				// {
+				// 	close((*cmd)->fd_hdoc);
+				// 	free((*cmd)->delimiter);
+				// }
 				(*cmd)->delimiter = ft_substr(str, start, i - start);
+				//(*cmd)->fd_hdoc = open("/tmp/.here_doc", O_APPEND | O_CREAT | O_RDWR | O_TRUNC, 0644);
 			}
 			else
 			{
