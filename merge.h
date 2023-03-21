@@ -6,7 +6,7 @@
 /*   By: yamrire <yamrire@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 05:13:04 by yamrire           #+#    #+#             */
-/*   Updated: 2023/03/16 18:08:00 by yamrire          ###   ########.fr       */
+/*   Updated: 2023/03/20 18:52:38 by yamrire          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,10 @@
 # include <signal.h>
 # include <sys/wait.h>
 # include <sys/errno.h>
+
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 50
+# endif
 
 typedef struct s_list
 {
@@ -44,12 +48,9 @@ typedef struct s_pars
 	char	**paths;
 	char	*input;
 	char	*output;
-	char	*append;
 	char	*delimiter;
 	int		fd_input;
 	int		fd_output;
-	int		fd_append;
-	int		fd_hdoc;
 }	t_pars;
 
 typedef	struct s_merge
@@ -64,8 +65,8 @@ typedef	struct s_merge
 
 extern t_merge	*my_global;
 
-char	**arrange_paths(char **envp);
-char	**get_paths(char **envp);
+char	**arrange_paths();
+char	**get_paths();
 void	free_double(char **pointer);
 char	**ft_split(char const *s, char c);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
@@ -87,11 +88,12 @@ void	ft_putchar_fd(char c, int fd);
 void	ft_putstr_fd(char *s, int fd);
 int		check_error_parsing(char *str);
 int		count_cmd(char *str);
-int		fill_cmd_list(char **env, char *str, t_list **list);
+int		fill_cmd_list(char *str, t_list **list);
 int		check_expansion(char *cmd);
 int		check_env_var(char *s);
 void	expand(char **s);
 void	expand_arg(char **arg);
+void	exit_error(int static_code);
 // env
 void	env_fill(char **envp);
 
@@ -107,5 +109,7 @@ void	rl_replace_line(const char *test, int flag);
 
 //execution
 void	execute(t_list *list, char **env);
+char	*get_next_line(int fd);
+void	here_doc(t_pars *cmd);
 
 #endif

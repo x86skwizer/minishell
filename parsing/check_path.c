@@ -6,28 +6,30 @@
 /*   By: yamrire <yamrire@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 07:59:34 by yamrire           #+#    #+#             */
-/*   Updated: 2023/03/08 08:00:05 by yamrire          ###   ########.fr       */
+/*   Updated: 2023/03/20 00:02:54 by yamrire          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../merge.h"
 
-char	**get_paths(char **envp)
+char	**get_paths()
 {
+	t_list	*tmp;
+	t_env	*env;
 	char	*path_var;
 	char	**paths;
-	int		i;
 
-	i = 0;
-	while (envp[i])
+	path_var = NULL;
+	tmp = my_global->env;
+	while (tmp != NULL)
 	{
-		path_var = ft_strnstr(envp[i], "PATH=", 5);
-		if (path_var)
+		env = (t_env *)tmp->content;
+		if (ft_strcmp(env->key, "PATH") == 0)
 		{
-			path_var = ft_substr(path_var, 5, ft_strlen(path_var) - 5);
+			path_var = ft_strdup(env->value);
 			break ;
 		}
-		i++;
+		tmp = tmp->next;
 	}
 	if (!path_var)
 		return (NULL);
@@ -36,13 +38,13 @@ char	**get_paths(char **envp)
 	return (paths);
 }
 
-char	**arrange_paths(char **envp)
+char	**arrange_paths()
 {
 	char	**paths;
 	char	*tmp;
 	int		i;
 
-	paths = get_paths(envp);
+	paths = get_paths();
 	if (!paths)
 		return (NULL);
 	i = 0;

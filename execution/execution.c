@@ -16,6 +16,8 @@ void	execute_builtins(char **cmd)
 		my_global->exit_code = builtin_unset(cmd);
 	else if (!ft_strcmp("exit", cmd[0]))
 		my_global->exit_code = builtin_exit(cmd);
+	if (my_global->exit_code)
+		exit_error(my_global->exit_code);
 	exit(my_global->exit_code);
 }
 
@@ -23,49 +25,65 @@ void	execute_one_cmd(t_pars *cmd, char **env, int i)
 {
 	if (i == 0)
 	{
-		if (cmd->input)
-		{
-			dup2(cmd->fd_input, 0);
-			close(cmd->fd_input);
-		}
 		if (my_global->nbr_cmd > 1)
 		{
 			close(my_global->fd_pip[0]);
 			dup2(my_global->fd_pip[1], 1);
 			close(my_global->fd_pip[1]);
 		}
-		if (my_global->nbr_cmd == 1)
+		if ((cmd->input) || (cmd->delimiter))
 		{
-			if (cmd->fd_output)
-			{
-				dup2(cmd->fd_output, 1);
-				close(cmd->fd_output);
-			}
+			dup2(cmd->fd_input, 0);
+			close(cmd->fd_input);
+		}
+		if (cmd->output)
+		{
+			dup2(cmd->fd_output, 1);
+			close(cmd->fd_output);
 		}
 	}
 	else if (i == my_global->nbr_cmd - 1)
-	{
+	{		
+
+		dup2(my_global->fd_tmp, 0);
+		close(my_global->fd_tmp);
+		if ((cmd->input) || (cmd->delimiter))
+		{
+			dup2(cmd->fd_input, 0);
+			close(cmd->fd_input);
+		}
 		if (cmd->fd_output)
 		{
 			dup2(cmd->fd_output, 1);
 			close(cmd->fd_output);
 		}
-		dup2(my_global->fd_tmp, 0);
-		close(my_global->fd_tmp);
 	}
 	else if (i > 0 && i < my_global->nbr_cmd - 1)
 	{
 		close(my_global->fd_pip[0]);
 		dup2(my_global->fd_pip[1], 1);
+		close(my_global->fd_pip[1]);
 		dup2(my_global->fd_tmp, 0);
 		close(my_global->fd_tmp);
-		close(my_global->fd_pip[1]);
+		if (cmd->input ||cmd->delimiter)
+		{
+			dup2(cmd->fd_input, 0);
+			close(cmd->fd_input);
+		}
+		if (cmd->output)
+		{
+			dup2(cmd->fd_output, 1);
+			close(cmd->fd_output);
+		}
 	}
 	if (ft_strcmp("echo", cmd->cmd[0]) && ft_strcmp("cd", cmd->cmd[0])
 			&& ft_strcmp("pwd", cmd->cmd[0]) && ft_strcmp("export", cmd->cmd[0]) 
 			&& ft_strcmp("unset", cmd->cmd[0]) && ft_strcmp("env", cmd->cmd[0]) 
 			&& ft_strcmp("exit", cmd->cmd[0]))
-		execve(cmd->cmd[0], cmd->cmd, env);
+		{
+			if (execve(cmd->cmd[0], cmd->cmd, env))
+				exit_error(errno);
+		}
 	 else
 		execute_builtins(cmd->cmd);
 }
@@ -103,6 +121,7 @@ void	execute(t_list *list, char **env)
 			execute_one_cmd(cmd, env, i);
 		curr = curr->next;
 		i++;
+
 	}
 	i = 0;
 	while (i < my_global->nbr_cmd)

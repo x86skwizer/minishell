@@ -6,7 +6,7 @@
 /*   By: yamrire <yamrire@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 01:07:47 by yamrire           #+#    #+#             */
-/*   Updated: 2023/03/16 12:02:15 by yamrire          ###   ########.fr       */
+/*   Updated: 2023/03/21 04:38:56 by yamrire          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,17 +23,17 @@ int	count_arg(char *str)
 	{
 		while (str[i] && str[i] == ' ') 
 			i++;
-		if(str[i] == 34) // "
+		if(str[i] == 34)
 		{
 			i++;
-			while (str[i] && str[i] != 34) // if !str[i] print error
+			while (str[i] && str[i] != 34)
 				i++;
 			nbr++;
 		}
-		else if(str[i] == 39) // '
+		else if(str[i] == 39)
 		{
 			i++;
-			while (str[i] && str[i] != 39) // if !str[i] print error
+			while (str[i] && str[i] != 39)
 				i++;
 			nbr++;
 		}
@@ -77,7 +77,7 @@ int	count_arg(char *str)
 		}
 		else if (str[i] && str[i] != ' ' && str[i] != '|')
 		{
-			while (str[i] && str[i] != ' ' && str[i] != '|') // if !str[i] print error
+			while (str[i] && str[i] != ' ' && str[i] != '|')
 				i++;
 			nbr++;
 		}
@@ -100,7 +100,7 @@ int	split_arg(char *str, t_pars **cmd)
 	{
 		while (str[i] && str[i] == ' ')
 			i++;
-		if(str[i] == 34) // "
+		if(str[i] == 34)
 		{
 			i++;
 			start = i;
@@ -112,7 +112,7 @@ int	split_arg(char *str, t_pars **cmd)
 			j++;
 			i++;
 		}
-		else if(str[i] == 39) // '
+		else if(str[i] == 39)
 		{
 			i++;
 			start = i;
@@ -133,13 +133,15 @@ int	split_arg(char *str, t_pars **cmd)
 				start = i;
 				while (str[i] && str[i] != ' ')
 					i++;
-				if ((*cmd)->append)
+				if ((*cmd)->output)
 				{
-					close((*cmd)->fd_append);
-					free((*cmd)->append);
+					close((*cmd)->fd_output);
+					free((*cmd)->output);
 				}
-				(*cmd)->append = ft_substr(str, start, i - start);
-				(*cmd)->fd_append = open((*cmd)->append, O_APPEND | O_CREAT | O_RDWR, 0644);
+				(*cmd)->output = ft_substr(str, start, i - start);
+				(*cmd)->fd_output = open((*cmd)->output, O_APPEND | O_CREAT | O_RDWR, 0644);
+				if ((*cmd)->fd_output == -1)
+					handle_error(errno);
 			}
 			else
 			{
@@ -155,6 +157,8 @@ int	split_arg(char *str, t_pars **cmd)
 				}
 				(*cmd)->output = ft_substr(str, start, i - start);
 				(*cmd)->fd_output = open((*cmd)->output, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+				if ((*cmd)->fd_output == -1)
+					handle_error(errno);
 			}
 		}
 		else if (str[i] == '<')
@@ -168,15 +172,19 @@ int	split_arg(char *str, t_pars **cmd)
 				start = i;
 				while (str[i] && str[i] != ' ')
 					i++;
-				if ((*cmd)->delimiter)
-					free((*cmd)->delimiter);
-				// if ((*cmd)->delimiter)
-				// {
-				// 	close((*cmd)->fd_hdoc);
-				// 	free((*cmd)->delimiter);
-				// }
+				if ((*cmd)->delimiter || ((*cmd)->input))
+				{
+					close((*cmd)->fd_input);
+					if ((*cmd)->delimiter)
+						free((*cmd)->delimiter);
+					if ((*cmd)->input)
+						free((*cmd)->delimiter);
+				}
 				(*cmd)->delimiter = ft_substr(str, start, i - start);
-				//(*cmd)->fd_hdoc = open("/tmp/.here_doc", O_APPEND | O_CREAT | O_RDWR | O_TRUNC, 0644);
+				(*cmd)->fd_input = open("/tmp/.here_doc", O_APPEND | O_CREAT | O_RDWR | O_TRUNC, 0644);
+				here_doc(*cmd);
+				close((*cmd)->fd_input);
+				(*cmd)->fd_input = open("/tmp/.here_doc", O_RDONLY);
 			}
 			else
 			{
@@ -192,6 +200,8 @@ int	split_arg(char *str, t_pars **cmd)
 				}
 				(*cmd)->input = ft_substr(str, start, i - start);
 				(*cmd)->fd_input = open((*cmd)->input, O_RDONLY);
+				if ((*cmd)->fd_input == -1)
+					handle_error(errno);
 			}
 		}
 		else if (str[i] && str[i] != ' ' && str[i] != '|')
@@ -211,7 +221,7 @@ int	split_arg(char *str, t_pars **cmd)
 	return (0);
 }
 
-int	fill_cmd_list(char **env, char *str, t_list **list)
+int	fill_cmd_list(char *str, t_list **list)
 {
 	t_pars	*cmd;
 	t_list	*new;
@@ -220,10 +230,9 @@ int	fill_cmd_list(char **env, char *str, t_list **list)
 	cmd = malloc(sizeof(t_pars));
 	cmd->input = NULL;
 	cmd->output = NULL;
-	cmd->append = NULL;
 	cmd->delimiter = NULL;
 	ipip = split_arg(str, &cmd);
-	cmd->paths = arrange_paths(env);
+	cmd->paths = arrange_paths();
 	if (ft_strcmp("echo", cmd->cmd[0]) && ft_strcmp("cd", cmd->cmd[0])
 			&& ft_strcmp("pwd", cmd->cmd[0]) && ft_strcmp("export", cmd->cmd[0]) 
 			&& ft_strcmp("unset", cmd->cmd[0]) && ft_strcmp("env", cmd->cmd[0]) 

@@ -6,7 +6,7 @@
 /*   By: yamrire <yamrire@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 02:25:12 by yamrire           #+#    #+#             */
-/*   Updated: 2023/03/09 06:20:46 by yamrire          ###   ########.fr       */
+/*   Updated: 2023/03/20 18:57:48 by yamrire          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,13 @@
 void	handle_error(int static_code)
 {
 	perror("minishell");
+	my_global->exit_code = static_code;
+}
+
+void	exit_error(int static_code)
+{
+	perror("minishell");
+	my_global->exit_code = static_code;
 	exit(static_code);
 }
 
