@@ -6,7 +6,7 @@
 #    By: yamrire <yamrire@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/20 20:11:20 by yamrire           #+#    #+#              #
-#    Updated: 2023/03/21 04:20:42 by yamrire          ###   ########.fr        #
+#    Updated: 2023/03/21 05:20:21 by yamrire          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,9 +30,8 @@ $(NAME) :
 	$(CC) $(LDFLAGS) $(FLAGS) $(SRC) -o $(NAME)
 #$(NAME) : $(OBJ)
 #	$(CC) $(LDFLAGS) -o $@ $^
-
-%.o: %.c
-	$(CC) $(FLAGS) $(CFLAGS) -c $< -o $@
+#%.o: %.c
+#	$(CC) $(FLAGS) $(CFLAGS) -c $< -o $@
 
 clean :
 	rm -f $(OBJ)
