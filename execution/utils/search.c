@@ -1,11 +1,11 @@
-#include "../minishell.h"
+#include "../../merge.h"
 
 void	search_replace(char *key, char *value)
 {
 	t_env	*tmp_content;
 	t_list	*tmp;
 
-	tmp = my_global->env;
+	tmp = g_global->env;
 	tmp_content = tmp->content;
 	while (tmp)
 	{

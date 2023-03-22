@@ -1,16 +1,15 @@
-#include "../minishell.h"
 #include "../../merge.h"
 
-void	ft_lstdelone(t_list *lst, void (*del)(void*))
-{
-	if (!del)
-		return ;
-	if (lst)
-	{
-		(*del)(lst->content);
-		free(lst);
-	}
-}
+// void	ft_lstdelone(t_list *lst, void (*del)(void*))
+// {
+// 	if (!del)
+// 		return ;
+// 	if (lst)
+// 	{
+// 		(*del)(lst->content);
+// 		free(lst);
+// 	}
+// }
 
 void	tenv_free(void *content)
 {
@@ -31,7 +30,7 @@ int	builtin_unset( char **args)
 	int		i;
 
 	i = 1;
-	tmp = my_global->env;
+	tmp = g_global->env;
 	while (tmp)
 	{
 		env_tmp = tmp->content;
@@ -42,7 +41,7 @@ int	builtin_unset( char **args)
 	}
 	while (args[i])
 	{
-		tmp = my_global->env;
+		tmp = g_global->env;
 		while (tmp)
 		{
 			env_tmp = (t_env *)(tmp->content);
@@ -55,7 +54,7 @@ int	builtin_unset( char **args)
 		}
 		i++;
 	}
-	tmp = my_global->env;
+	tmp = g_global->env;
 	printf("-----------after unset------------\n");
 	while (tmp)
 	{

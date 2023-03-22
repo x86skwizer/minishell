@@ -1,4 +1,3 @@
-#include "../minishell.h"
 #include "../../merge.h"
 
 int    ft_cmp_n(char *str)

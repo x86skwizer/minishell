@@ -6,7 +6,7 @@
 /*   By: yamrire <yamrire@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 19:08:42 by yamrire           #+#    #+#             */
-/*   Updated: 2023/03/19 23:41:41 by yamrire          ###   ########.fr       */
+/*   Updated: 2023/03/22 07:36:52 by yamrire          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,7 @@
 #include <readline/readline.h>
 #include <readline/history.h>
 
-t_merge	*my_global;
-
-void	int_handler(int sig)
-{
-	(void)sig;
-	printf("\n");
-	rl_on_new_line();
-	rl_replace_line("", 0);
-	rl_redisplay();
-	my_global->exit_code  = 1;
-
-}
-
-void	quit_handler(int sig)
-{
-	(void)sig;
-	rl_on_new_line();
-	rl_redisplay();
-}
+t_merge	*g_global;
 
 int	main(int ac, char **av, char **env)
 {
@@ -42,38 +24,38 @@ int	main(int ac, char **av, char **env)
 
 	signal(SIGINT, int_handler);
 	signal(SIGQUIT, quit_handler);
-	my_global = malloc(sizeof(t_merge));
-	my_global->env = malloc(sizeof(t_list));
-	env_fill(env);
 	if (ac >= 1)
 	{
 		av[1] = NULL;
-		my_global->exit_code = 0;
 		while (1)
 		{
+			g_global = malloc(sizeof(t_merge));
+			g_global->exit_code = 0;
+			g_global->env = malloc(sizeof(t_list));
+			env_fill(env);
 			str = readline("minishell$  ");
 			if (str && *str)
 				add_history(str);
 			else
 				continue ;
-			my_global->exit_code = check_error_parsing(str);
-			if (my_global->exit_code)
+			g_global->exit_code = check_error_parsing(str);
+			if (g_global->exit_code)
 			{
 				printf("minishell: syntax error unexpected token\n");
 				free(str);
 				continue ;
 			}
+			list = NULL;
 			data.i = 0;
 			data.ipip = 0;
-			list = NULL;
-			my_global->nbr_cmd = count_cmd(str);
-			while (data.i < my_global->nbr_cmd)
+			g_global->nbr_cmd = count_cmd(str);
+			while (data.i < g_global->nbr_cmd)
 			{
 				data.ipip += fill_cmd_list(str + data.ipip, &list);
 				data.i++;
 			}
-			
 			execute(list, env);
+			str = parent_process(list, str);
 		}
 	}
 	return (0);

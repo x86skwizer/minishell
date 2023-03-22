@@ -1,4 +1,4 @@
-#include "../minishell.h"
+#include "../../merge.h"
 
 int	ft_count_words(char const *s, char c)
 {
@@ -47,7 +47,7 @@ void	ft_putendl_fd(char *s, int fd)
 	}
 }
 
-int ft_strncmp(const char *s1, const char *s2, size_t n)
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
 	unsigned char	*str1;
 	unsigned char	*str2;

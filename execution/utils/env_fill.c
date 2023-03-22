@@ -19,12 +19,12 @@ void	env_fill(char **envp)
 	int		i;
 
 	i = 0;
-	my_global->env = NULL;
+	g_global->env = NULL;
 	while (envp[i])
 	{
 		pointer = ft_split(envp[i], '=');
 		env_node = env_create(pointer[0], pointer[1]);
-		ft_lstadd_back(&(my_global->env), ft_lstnew(env_node));
+		ft_lstadd_back(&(g_global->env), ft_lstnew(env_node));
 		i++;
 	}
 }

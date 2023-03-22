@@ -6,13 +6,13 @@
 /*   By: yamrire <yamrire@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 07:59:34 by yamrire           #+#    #+#             */
-/*   Updated: 2023/03/20 00:02:54 by yamrire          ###   ########.fr       */
+/*   Updated: 2023/03/22 07:09:06 by yamrire          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../merge.h"
 
-char	**get_paths()
+char	**get_paths(void)
 {
 	t_list	*tmp;
 	t_env	*env;
@@ -20,7 +20,7 @@ char	**get_paths()
 	char	**paths;
 
 	path_var = NULL;
-	tmp = my_global->env;
+	tmp = g_global->env;
 	while (tmp != NULL)
 	{
 		env = (t_env *)tmp->content;
@@ -38,7 +38,7 @@ char	**get_paths()
 	return (paths);
 }
 
-char	**arrange_paths()
+char	**arrange_paths(void)
 {
 	char	**paths;
 	char	*tmp;

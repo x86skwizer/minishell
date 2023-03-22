@@ -1,9 +1,8 @@
-#include "../minishell.h"
 #include "../../merge.h"
 
-int builtin_pwd(void)
+int	builtin_pwd(void)
 {
-	char *pwd;
+	char	*pwd;
 
 	pwd = getcwd(NULL, 0);
 	if (!pwd)

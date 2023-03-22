@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   heredoc.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yamrire <yamrire@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/22 02:47:26 by yamrire           #+#    #+#             */
+/*   Updated: 2023/03/22 07:03:47 by yamrire          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../merge.h"
 
 int	cmpstr(const char *s1, const char *s2)
@@ -28,7 +40,7 @@ void	here_doc(t_pars *cmd)
 	limiter = ft_strjoin(cmd->delimiter, "\n");
 	while (1)
 	{
-		write(1 ,"> ", 2);
+		write(1, "> ", 2);
 		here_doc = get_next_line(0);
 		if (here_doc == NULL)
 		{

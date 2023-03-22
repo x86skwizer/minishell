@@ -1,90 +1,57 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   execution.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yamrire <yamrire@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/22 02:47:09 by yamrire           #+#    #+#             */
+/*   Updated: 2023/03/22 06:59:50 by yamrire          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../merge.h"
+
+void	start_exec(int i)
+{
+	g_global->pid[i] = fork();
+	if (g_global->pid[i] == -1)
+		handle_error(errno);
+}
 
 void	execute_builtins(char **cmd)
 {
 	if (!ft_strcmp("echo", cmd[0]))
-		my_global->exit_code = builtin_echo(cmd);
+		g_global->exit_code = builtin_echo(cmd);
 	else if (!ft_strcmp("cd", cmd[0]))
-		my_global->exit_code = builtin_cd(cmd);
+		g_global->exit_code = builtin_cd(cmd);
 	else if (!ft_strcmp("pwd", cmd[0]))
-		my_global->exit_code = builtin_pwd();
+		g_global->exit_code = builtin_pwd();
 	else if (!ft_strcmp("env", cmd[0]))
-		my_global->exit_code = builtin_env();
+		g_global->exit_code = builtin_env();
 	else if (!ft_strcmp("export", cmd[0]))
-		my_global->exit_code = builtin_export(cmd);
+		g_global->exit_code = builtin_export(cmd);
 	else if (!ft_strcmp("unset", cmd[0]))
-		my_global->exit_code = builtin_unset(cmd);
+		g_global->exit_code = builtin_unset(cmd);
 	else if (!ft_strcmp("exit", cmd[0]))
-		my_global->exit_code = builtin_exit(cmd);
-	if (my_global->exit_code)
-		exit_error(my_global->exit_code);
-	exit(my_global->exit_code);
+		g_global->exit_code = builtin_exit(cmd);
+	if (g_global->exit_code)
+		exit_error(g_global->exit_code);
+	exit(g_global->exit_code);
 }
 
 void	execute_one_cmd(t_pars *cmd, char **env, int i)
 {
-	if (i == 0)
-	{
-		if (my_global->nbr_cmd > 1)
-		{
-			close(my_global->fd_pip[0]);
-			dup2(my_global->fd_pip[1], 1);
-			close(my_global->fd_pip[1]);
-		}
-		if ((cmd->input) || (cmd->delimiter))
-		{
-			dup2(cmd->fd_input, 0);
-			close(cmd->fd_input);
-		}
-		if (cmd->output)
-		{
-			dup2(cmd->fd_output, 1);
-			close(cmd->fd_output);
-		}
-	}
-	else if (i == my_global->nbr_cmd - 1)
-	{		
-
-		dup2(my_global->fd_tmp, 0);
-		close(my_global->fd_tmp);
-		if ((cmd->input) || (cmd->delimiter))
-		{
-			dup2(cmd->fd_input, 0);
-			close(cmd->fd_input);
-		}
-		if (cmd->fd_output)
-		{
-			dup2(cmd->fd_output, 1);
-			close(cmd->fd_output);
-		}
-	}
-	else if (i > 0 && i < my_global->nbr_cmd - 1)
-	{
-		close(my_global->fd_pip[0]);
-		dup2(my_global->fd_pip[1], 1);
-		close(my_global->fd_pip[1]);
-		dup2(my_global->fd_tmp, 0);
-		close(my_global->fd_tmp);
-		if (cmd->input ||cmd->delimiter)
-		{
-			dup2(cmd->fd_input, 0);
-			close(cmd->fd_input);
-		}
-		if (cmd->output)
-		{
-			dup2(cmd->fd_output, 1);
-			close(cmd->fd_output);
-		}
-	}
+	check_position(cmd, i);
 	if (ft_strcmp("echo", cmd->cmd[0]) && ft_strcmp("cd", cmd->cmd[0])
-			&& ft_strcmp("pwd", cmd->cmd[0]) && ft_strcmp("export", cmd->cmd[0]) 
-			&& ft_strcmp("unset", cmd->cmd[0]) && ft_strcmp("env", cmd->cmd[0]) 
-			&& ft_strcmp("exit", cmd->cmd[0]))
-		{
-			if (execve(cmd->cmd[0], cmd->cmd, env))
-				exit_error(errno);
-		}
-	 else
+		&& ft_strcmp("pwd", cmd->cmd[0]) && ft_strcmp("export", cmd->cmd[0])
+		&& ft_strcmp("unset", cmd->cmd[0]) && ft_strcmp("env", cmd->cmd[0])
+		&& ft_strcmp("exit", cmd->cmd[0]))
+	{
+		if (execve(cmd->cmd[0], cmd->cmd, env))
+			exit_error(errno);
+	}
+	else
 		execute_builtins(cmd->cmd);
 }
 
@@ -92,41 +59,26 @@ void	execute(t_list *list, char **env)
 {
 	t_list	*curr;
 	t_pars	*cmd;
-	int	i;
+	int		i;
 
 	i = 0;
 	curr = list;
-	my_global->fd_tmp = -1;
-	my_global->pid = malloc(my_global->nbr_cmd * sizeof(pid_t));
-	while (i < my_global->nbr_cmd)
+	g_global->fd_tmp = -1;
+	g_global->pid = malloc(g_global->nbr_cmd * sizeof(pid_t));
+	while (i < g_global->nbr_cmd)
 	{
 		cmd = (t_pars *)curr->content;
-		if (my_global->nbr_cmd > 1)
+		if (g_global->nbr_cmd > 1)
 		{
-			if (i <= my_global->nbr_cmd - 1 && i > 0)
-			{
-				if (my_global->fd_tmp != -1)
-					close(my_global->fd_tmp);
-				my_global->fd_tmp = dup(my_global->fd_pip[0]);
-				close(my_global->fd_pip[0]);
-				close(my_global->fd_pip[1]);
-			}
-			if (i < my_global->nbr_cmd - 1)
-				pipe(my_global->fd_pip);
+			if (i <= g_global->nbr_cmd - 1 && i > 0)
+				init_pipe();
+			if (i < g_global->nbr_cmd - 1)
+				pipe(g_global->fd_pip);
 		}
-		my_global->pid[i] = fork();
-		if (my_global->pid[i] == -1)
-			handle_error(errno);
-		else if (my_global->pid[i] == 0)
+		start_exec(i);
+		if (g_global->pid[i] == 0)
 			execute_one_cmd(cmd, env, i);
 		curr = curr->next;
-		i++;
-
-	}
-	i = 0;
-	while (i < my_global->nbr_cmd)
-	{
-		waitpid(my_global->pid[i], NULL, 0);
 		i++;
 	}
 }

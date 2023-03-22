@@ -6,7 +6,7 @@
 /*   By: yamrire <yamrire@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 01:07:47 by yamrire           #+#    #+#             */
-/*   Updated: 2023/03/21 04:38:56 by yamrire          ###   ########.fr       */
+/*   Updated: 2023/03/22 07:15:49 by yamrire          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,16 +21,16 @@ int	count_arg(char *str)
 	i = 0;
 	while (str[i] != '\0' && str[i] != '|')
 	{
-		while (str[i] && str[i] == ' ') 
+		while (str[i] && str[i] == ' ')
 			i++;
-		if(str[i] == 34)
+		if (str[i] == 34)
 		{
 			i++;
 			while (str[i] && str[i] != 34)
 				i++;
 			nbr++;
 		}
-		else if(str[i] == 39)
+		else if (str[i] == 39)
 		{
 			i++;
 			while (str[i] && str[i] != 39)
@@ -100,7 +100,7 @@ int	split_arg(char *str, t_pars **cmd)
 	{
 		while (str[i] && str[i] == ' ')
 			i++;
-		if(str[i] == 34)
+		if (str[i] == 34)
 		{
 			i++;
 			start = i;
@@ -112,7 +112,7 @@ int	split_arg(char *str, t_pars **cmd)
 			j++;
 			i++;
 		}
-		else if(str[i] == 39)
+		else if (str[i] == 39)
 		{
 			i++;
 			start = i;
@@ -139,7 +139,8 @@ int	split_arg(char *str, t_pars **cmd)
 					free((*cmd)->output);
 				}
 				(*cmd)->output = ft_substr(str, start, i - start);
-				(*cmd)->fd_output = open((*cmd)->output, O_APPEND | O_CREAT | O_RDWR, 0644);
+				(*cmd)->fd_output = open((*cmd)->output, O_APPEND
+						| O_CREAT | O_RDWR, 0644);
 				if ((*cmd)->fd_output == -1)
 					handle_error(errno);
 			}
@@ -156,7 +157,8 @@ int	split_arg(char *str, t_pars **cmd)
 					free((*cmd)->output);
 				}
 				(*cmd)->output = ft_substr(str, start, i - start);
-				(*cmd)->fd_output = open((*cmd)->output, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+				(*cmd)->fd_output = open((*cmd)->output, O_WRONLY
+						| O_CREAT | O_TRUNC, 0644);
 				if ((*cmd)->fd_output == -1)
 					handle_error(errno);
 			}
@@ -178,10 +180,11 @@ int	split_arg(char *str, t_pars **cmd)
 					if ((*cmd)->delimiter)
 						free((*cmd)->delimiter);
 					if ((*cmd)->input)
-						free((*cmd)->delimiter);
+						free((*cmd)->input);
 				}
 				(*cmd)->delimiter = ft_substr(str, start, i - start);
-				(*cmd)->fd_input = open("/tmp/.here_doc", O_APPEND | O_CREAT | O_RDWR | O_TRUNC, 0644);
+				(*cmd)->fd_input = open("/tmp/.here_doc", O_APPEND
+						| O_CREAT | O_RDWR | O_TRUNC, 0644);
 				here_doc(*cmd);
 				close((*cmd)->fd_input);
 				(*cmd)->fd_input = open("/tmp/.here_doc", O_RDONLY);
@@ -193,10 +196,13 @@ int	split_arg(char *str, t_pars **cmd)
 				start = i;
 				while (str[i] && str[i] != ' ')
 					i++;
-				if ((*cmd)->input)
+				if ((*cmd)->delimiter || ((*cmd)->input))
 				{
 					close((*cmd)->fd_input);
-					free((*cmd)->input);
+					if ((*cmd)->delimiter)
+						free((*cmd)->delimiter);
+					if ((*cmd)->input)
+						free((*cmd)->input);
 				}
 				(*cmd)->input = ft_substr(str, start, i - start);
 				(*cmd)->fd_input = open((*cmd)->input, O_RDONLY);
@@ -234,9 +240,9 @@ int	fill_cmd_list(char *str, t_list **list)
 	ipip = split_arg(str, &cmd);
 	cmd->paths = arrange_paths();
 	if (ft_strcmp("echo", cmd->cmd[0]) && ft_strcmp("cd", cmd->cmd[0])
-			&& ft_strcmp("pwd", cmd->cmd[0]) && ft_strcmp("export", cmd->cmd[0]) 
-			&& ft_strcmp("unset", cmd->cmd[0]) && ft_strcmp("env", cmd->cmd[0]) 
-			&& ft_strcmp("exit", cmd->cmd[0]))
+		&& ft_strcmp("pwd", cmd->cmd[0]) && ft_strcmp("export", cmd->cmd[0])
+		&& ft_strcmp("unset", cmd->cmd[0]) && ft_strcmp("env", cmd->cmd[0])
+		&& ft_strcmp("exit", cmd->cmd[0]))
 		add_cmd_path(&cmd);
 	new = ft_lstnew(cmd);
 	ft_lstadd_back(list, new);

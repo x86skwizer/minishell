@@ -6,7 +6,7 @@
 /*   By: yamrire <yamrire@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 02:25:12 by yamrire           #+#    #+#             */
-/*   Updated: 2023/03/20 18:57:48 by yamrire          ###   ########.fr       */
+/*   Updated: 2023/03/22 07:24:49 by yamrire          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,13 @@
 void	handle_error(int static_code)
 {
 	perror("minishell");
-	my_global->exit_code = static_code;
+	g_global->exit_code = static_code;
 }
 
 void	exit_error(int static_code)
 {
 	perror("minishell");
-	my_global->exit_code = static_code;
+	g_global->exit_code = static_code;
 	exit(static_code);
 }
 
@@ -77,13 +77,13 @@ int	count_cmd(char *str)
 	nbr = 1;
 	while (str[i])
 	{
-		if(str[i] == 34) // "
+		if (str[i] == 34)
 		{
 			i++;
 			while (str[i] && str[i] != 34)
 				i++;
 		}
-		else if(str[i] == 39) // '
+		else if (str[i] == 39)
 		{
 			i++;
 			while (str[i] && str[i] != 39)

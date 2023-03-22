@@ -1,4 +1,3 @@
-#include "../minishell.h"
 #include "../../merge.h"
 
 void	ft_lstswap(t_list *lst1, t_list *lst2)
@@ -45,7 +44,7 @@ int	print_export(t_list *env_list)
 	t_list		*env_list1;
 
 	env_list1 = sort_env(env_list);
-	env_list1 = my_global->env;
+	env_list1 = g_global->env;
 	while (env_list1)
 	{
 		env_tmp = (t_env *)(env_list1->content);
@@ -69,7 +68,7 @@ int	builtin_export(char **argv)
 
 	j = 0;
 	check = 0;
-	env_list = my_global->env;
+	env_list = g_global->env;
 	if (argv[1] == NULL)
 		print_export(env_list);
 	else
@@ -90,9 +89,9 @@ int	builtin_export(char **argv)
 				env_list = env_list->next;
 			}
 			
-			env_list = my_global->env;
+			env_list = g_global->env;
 			if (check == 0)
-				ft_lstadd_back(&my_global->env,
+				ft_lstadd_back(&g_global->env,
 					ft_lstnew(env_create(list[0], list[1])));
 			j++;
 		}
