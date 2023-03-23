@@ -1,16 +1,5 @@
 #include "../../merge.h"
 
-// void	ft_lstdelone(t_list *lst, void (*del)(void*))
-// {
-// 	if (!del)
-// 		return ;
-// 	if (lst)
-// 	{
-// 		(*del)(lst->content);
-// 		free(lst);
-// 	}
-// }
-
 void	tenv_free(void *content)
 {
 	t_env	*env;
@@ -30,7 +19,7 @@ int	builtin_unset( char **args)
 	int		i;
 
 	i = 1;
-	tmp = g_global->env;
+	tmp = g_global.env;
 	while (tmp)
 	{
 		env_tmp = tmp->content;
@@ -41,7 +30,7 @@ int	builtin_unset( char **args)
 	}
 	while (args[i])
 	{
-		tmp = g_global->env;
+		tmp = g_global.env;
 		while (tmp)
 		{
 			env_tmp = (t_env *)(tmp->content);
@@ -54,7 +43,7 @@ int	builtin_unset( char **args)
 		}
 		i++;
 	}
-	tmp = g_global->env;
+	tmp = g_global.env;
 	printf("-----------after unset------------\n");
 	while (tmp)
 	{

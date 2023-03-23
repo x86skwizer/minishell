@@ -6,7 +6,7 @@
 /*   By: yamrire <yamrire@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 07:38:56 by yamrire           #+#    #+#             */
-/*   Updated: 2023/03/22 07:28:00 by yamrire          ###   ########.fr       */
+/*   Updated: 2023/03/22 08:22:27 by yamrire          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	check_env_var(char *s)
 
 	if (s[0] == '?')
 		return (1);
-	list = g_global->env;
+	list = g_global.env;
 	while (list)
 	{
 		env = (t_env *)list->content;
@@ -56,14 +56,14 @@ void	expand(char **s)
 
 	if ((*s)[0] == '?')
 	{
-		s1 = ft_itoa(g_global->exit_code);
+		s1 = ft_itoa(g_global.exit_code);
 		s2 = ft_strdup((*s) + 1);
 		free(*s);
 		(*s) = ft_strjoin(s1, s2);
 		free(s1);
 		free(s2);
 	}
-	list = g_global->env;
+	list = g_global.env;
 	while (list)
 	{
 		env = (t_env *)list->content;

@@ -6,7 +6,7 @@
 /*   By: yamrire <yamrire@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 07:59:34 by yamrire           #+#    #+#             */
-/*   Updated: 2023/03/22 07:09:06 by yamrire          ###   ########.fr       */
+/*   Updated: 2023/03/22 08:21:27 by yamrire          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	**get_paths(void)
 	char	**paths;
 
 	path_var = NULL;
-	tmp = g_global->env;
+	tmp = g_global.env;
 	while (tmp != NULL)
 	{
 		env = (t_env *)tmp->content;

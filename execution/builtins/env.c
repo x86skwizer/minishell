@@ -5,7 +5,7 @@ int	builtin_env(void)
 	t_list		*tmp;
 	t_env		*tmp_content;
 
-	tmp = g_global->env;
+	tmp = g_global.env;
 	while (tmp)
 	{
 		tmp_content = (t_env *)tmp->content;
