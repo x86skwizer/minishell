@@ -6,7 +6,7 @@
 /*   By: yamrire <yamrire@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 05:13:04 by yamrire           #+#    #+#             */
-/*   Updated: 2023/03/22 19:34:22 by yamrire          ###   ########.fr       */
+/*   Updated: 2023/03/23 21:30:31 by yamrire          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ int		check_expansion(char *cmd);
 int		check_env_var(char *s);
 void	expand(char **s);
 void	expand_arg(char **arg);
-void	exit_error(int static_code);
+void	exit_error(int static_code, char *cmd);
 void	env_fill(char **envp);
 int		builtin_echo(char **args);
 int		builtin_cd(char **args);
