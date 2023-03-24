@@ -14,6 +14,5 @@ int	builtin_env(void)
 		ft_putendl_fd(tmp_content->value, STDOUT_FILENO);
 		tmp = tmp->next;
 	}
-	free(tmp);
 	return (0);
 }
