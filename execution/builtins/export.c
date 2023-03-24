@@ -50,9 +50,14 @@ int	print_export(t_list *env_list)
 		env_tmp = (t_env *)(env_list1->content);
 		ft_putstr_fd("declare -x ", STDOUT_FILENO);
 		ft_putstr_fd(env_tmp->key, STDOUT_FILENO);
-		ft_putstr_fd("=\"", STDOUT_FILENO);
-		ft_putstr_fd(env_tmp->value, STDOUT_FILENO);
-		ft_putendl_fd("\"", STDOUT_FILENO);
+		if (env_tmp->value)
+		{
+			ft_putstr_fd("=\"", STDOUT_FILENO);
+			ft_putstr_fd(env_tmp->value, STDOUT_FILENO);
+			ft_putendl_fd("\"", STDOUT_FILENO);
+		}
+		else
+			ft_putendl_fd("", STDOUT_FILENO);
 		env_list1 = env_list1->next;
 	}
 	return (0);
@@ -77,8 +82,8 @@ int	builtin_export(char **argv)
 		j = 1;
 		while (argv[j])
 		{
-			printf("argv[%d]: %s\n", j, argv[j]);
 			list = ft_split(argv[j], '=');
+			check = 0;
 			while (env_list)
 			{
 				env_tmp = (t_env *)(env_list->content);
