@@ -89,6 +89,16 @@ int	builtin_export(char **argv)
 			while (env_list)
 			{
 				env_tmp = (t_env *)(env_list->content);
+				if (!list[0])
+                {
+                    if (env_list->next)
+                    {
+                        env_list = env_list->next;
+                        continue ;
+                    }
+                    else 
+                        return (0);
+                }
 				if (ft_strcmp(env_tmp->key, list[0]) == 0)
 				{
 					if (list[1])
@@ -97,6 +107,16 @@ int	builtin_export(char **argv)
 					{
 						list[1] = ft_strdup("");
 						env_tmp->value = list[1];
+					}
+					else if (!list[1])
+					{
+						if (env_list->next)
+						{
+							env_list = env_list->next;
+							continue ;
+						}
+						else
+							break ;
 					}
 
 					check = 1;
