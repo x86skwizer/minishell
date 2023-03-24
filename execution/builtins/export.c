@@ -83,7 +83,9 @@ int	builtin_export(char **argv)
 		while (argv[j])
 		{
 			if (ft_strchr(argv[j], '\"'))
-				argv[j] = ft_trim(argv[j]);
+				argv[j] = ft_trim(argv[j], '\"');
+			if (ft_strchr(argv[j], '\''))
+				argv[j] = ft_trim(argv[j], '\'');
 			list = ft_split(argv[j], '=');
 			check = 0;
 			while (env_list)

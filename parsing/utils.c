@@ -6,7 +6,7 @@
 /*   By: yamrire <yamrire@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 02:25:12 by yamrire           #+#    #+#             */
-/*   Updated: 2023/03/24 10:18:29 by yamrire          ###   ########.fr       */
+/*   Updated: 2023/03/24 16:43:57 by yamrire          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,14 +112,14 @@ int	count_cmd(char *str)
 }
 
 
-char	*ft_trim(char *s)
+char	*ft_trim(char *s, char c)
 {
 	char	**str;
 	char	*tmp;
 	char	*tmp1;
 	int		i;
 
-	str = ft_split(s, '\"');
+	str = ft_split(s, c);
 	i = 0;
 	tmp = str[0];
 	while (str[i + 1])
