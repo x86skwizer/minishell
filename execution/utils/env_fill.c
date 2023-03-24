@@ -7,14 +7,13 @@ t_env	*env_create(char *key, char *value)
 	env = (t_env *)malloc(sizeof(t_env));
 	if (!env)
 		return (NULL);
-	env->key = key;
-	env->value = value;
+	env->key = ft_strdup(key);
+	env->value = ft_strdup(value);
 	return (env);
 }
 
 void	env_fill(char **envp)
 {
-	t_env	*env_node;
 	char	**pointer;
 	int		i;
 
@@ -23,8 +22,8 @@ void	env_fill(char **envp)
 	while (envp[i])
 	{
 		pointer = ft_split(envp[i], '=');
-		env_node = env_create(pointer[0], pointer[1]);
-		ft_lstadd_back(&(g_global.env), ft_lstnew(env_node));
+		ft_lstadd_back(&(g_global.env), ft_lstnew(env_create(pointer[0], pointer[1])));
+		free_double(pointer);
 		i++;
 	}
 }
