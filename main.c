@@ -6,7 +6,7 @@
 /*   By: yamrire <yamrire@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 19:08:42 by yamrire           #+#    #+#             */
-/*   Updated: 2023/03/22 19:34:14 by yamrire          ###   ########.fr       */
+/*   Updated: 2023/03/24 02:39:59 by yamrire          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,15 @@ int	main(int ac, char **av, char **env)
 	if (ac >= 1)
 	{
 		av[1] = NULL;
+		g_global.env = malloc(sizeof(t_list));
+		env_fill(env);
 		while (1)
 		{
-			g_global.env = malloc(sizeof(t_list));
-			env_fill(env);
 			str = readline("minishell$  ");
 			if (str && *str)
 				add_history(str);
+			else if (str == NULL)
+				exit(0);
 			else
 				continue ;
 			data.i = check_error_parsing(str);
@@ -56,6 +58,7 @@ int	main(int ac, char **av, char **env)
 			execute(list, env);
 			str = parent_process(list, str);
 		}
+		ft_lstclear(&(g_global.env), free);
 	}
 	return (0);
 }
