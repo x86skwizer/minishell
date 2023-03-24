@@ -6,7 +6,7 @@
 /*   By: yamrire <yamrire@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 19:08:42 by yamrire           #+#    #+#             */
-/*   Updated: 2023/03/24 04:35:07 by yamrire          ###   ########.fr       */
+/*   Updated: 2023/03/24 21:38:37 by yamrire          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ int	main(int ac, char **av, char **env)
 	if (ac >= 1)
 	{
 		av[1] = NULL;
-		g_global.env = malloc(sizeof(t_list));
 		env_fill(env);
 		while (1)
 		{
@@ -56,9 +55,8 @@ int	main(int ac, char **av, char **env)
 				data.i++;
 			}
 			execute(list, env);
-			str = parent_process(list, str);
+			str = parent_process(list, str);			
 		}
-		ft_lstclear(&(g_global.env), free);
 	}
 	return (0);
 }
