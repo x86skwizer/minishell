@@ -82,6 +82,8 @@ int	builtin_export(char **argv)
 		j = 1;
 		while (argv[j])
 		{
+			if (ft_strchr(argv[j], '\"'))
+				argv[j] = ft_trim(argv[j]);
 			list = ft_split(argv[j], '=');
 			check = 0;
 			while (env_list)
@@ -89,7 +91,14 @@ int	builtin_export(char **argv)
 				env_tmp = (t_env *)(env_list->content);
 				if (ft_strcmp(env_tmp->key, list[0]) == 0)
 				{
-					env_tmp->value = list[1];
+					if (list[1])
+						env_tmp->value = list[1];
+					else if (ft_strchr(argv[j], '='))
+					{
+						list[1] = ft_strdup("");
+						env_tmp->value = list[1];
+					}
+
 					check = 1;
 				}
 				env_list = env_list->next;

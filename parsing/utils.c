@@ -6,7 +6,7 @@
 /*   By: yamrire <yamrire@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 02:25:12 by yamrire           #+#    #+#             */
-/*   Updated: 2023/03/23 21:29:57 by yamrire          ###   ########.fr       */
+/*   Updated: 2023/03/24 07:00:19 by yamrire          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,4 +109,26 @@ int	count_cmd(char *str)
 		i++;
 	}
 	return (nbr);
+}
+
+
+char	*ft_trim(char *s)
+{
+	char	**str;
+	char	*tmp;
+	char	*tmp1;
+	int		i;
+
+	str = ft_split(s, '\"');
+	i = 0;
+	tmp = str[0];
+	while (str[i + 1])
+	{
+		tmp1 = tmp;
+		tmp = ft_strjoin(tmp1, str[i + 1]);
+		free(tmp1);
+		i++;
+	}
+	free (s);
+	return (tmp);
 }

@@ -6,7 +6,7 @@
 /*   By: yamrire <yamrire@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 05:13:04 by yamrire           #+#    #+#             */
-/*   Updated: 2023/03/23 21:30:31 by yamrire          ###   ########.fr       */
+/*   Updated: 2023/03/24 06:28:24 by yamrire          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,5 +133,6 @@ void	dup_tmp(void);
 void	check_position(t_pars *cmd, int i);
 void	int_handler(int sig);
 void	quit_handler(int sig);
+char	*ft_trim(char *s);
 
 #endif
