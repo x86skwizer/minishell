@@ -6,7 +6,7 @@
 /*   By: yamrire <yamrire@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 04:50:56 by yamrire           #+#    #+#             */
-/*   Updated: 2023/03/24 02:39:41 by yamrire          ###   ########.fr       */
+/*   Updated: 2023/03/24 21:35:44 by yamrire          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,14 +37,12 @@ char	*parent_process(t_list *list, char *str)
 {
 	t_data	data;
 
-	data.i = 0;
 	data.curr = list;
-	while (data.i < g_global.nbr_cmd)
+	while (data.curr)
 	{
 		data.cmd = (t_pars *)data.curr->content;
-		end_program(data.cmd);
 		waitpid(-1, &g_global.exit_code, 0);
-		data.i++;
+		end_program(data.cmd);
 		data.curr = data.curr->next;
 	}
 	free(g_global.pid);
