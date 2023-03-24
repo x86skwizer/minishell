@@ -20,12 +20,11 @@ t_list	*sort_env(t_list *env_list)
 	while (tmp)
 	{
 		tmp1 = tmp->next;
-		while (tmp1 && tmp1->next)
+		while (tmp1)
 		{
 			env_tmp = (t_env *)(tmp->content);
 			env_tmp2 = (t_env *)(tmp1->content);
-			if (ft_strncmp(env_tmp->key, env_tmp2->key,
-					ft_strlen(env_tmp->key)) > 0)
+			if (ft_strcmp(env_tmp->key, env_tmp2->key) > 0)
 			{
 				ft_lstswap(tmp1, tmp);
 				env_tmp = (t_env *)(tmp->content);
@@ -44,6 +43,7 @@ int	print_export(t_list *env_list)
 	t_list		*env_list1;
 
 	env_list1 = sort_env(env_list);
+
 	env_list1 = g_global.env;
 	while (env_list1)
 	{
@@ -65,6 +65,7 @@ int	builtin_export(char **argv)
 	t_env		*env_tmp;
 	int			check;
 	char		**list;
+	t_env	*env_node;
 
 	j = 0;
 	check = 0;
@@ -81,7 +82,7 @@ int	builtin_export(char **argv)
 			while (env_list)
 			{
 				env_tmp = (t_env *)(env_list->content);
-				if (ft_strncmp(env_tmp->key, list[0], ft_strlen(list[0])) == 0)
+				if (ft_strcmp(env_tmp->key, list[0]) == 0)
 				{
 					env_tmp->value = list[1];
 					check = 1;
@@ -91,8 +92,10 @@ int	builtin_export(char **argv)
 			
 			env_list = g_global.env;
 			if (check == 0)
-				ft_lstadd_back(&g_global.env,
-					ft_lstnew(env_create(list[0], list[1])));
+			{
+				env_node = env_create(list[0], list[1]);
+				ft_lstadd_back(&(g_global.env), ft_lstnew(env_node));
+			}
 			j++;
 		}
 	}
