@@ -6,7 +6,7 @@
 /*   By: yamrire <yamrire@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 19:08:42 by yamrire           #+#    #+#             */
-/*   Updated: 2023/03/25 01:02:25 by yamrire          ###   ########.fr       */
+/*   Updated: 2023/03/25 01:55:05 by yamrire          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,18 @@
 #include <readline/history.h>
 
 t_merge	g_global;
+void free_list(t_list *list)
+{
+    t_list *tmp;
+
+    while (list)
+    {
+        tmp = list;
+        list = list->next;
+        free(tmp->content);
+        free(tmp);
+    }
+}
 
 int	main(int ac, char **av, char **env)
 {
@@ -36,8 +48,10 @@ int	main(int ac, char **av, char **env)
 				add_history(str);
 			else if (str == NULL)
 				exit(0);
-			else
+			else{
+				free(str);
 				continue ;
+			}
 			data.i = check_error_parsing(str);
 			if (data.i)
 			{
@@ -55,11 +69,12 @@ int	main(int ac, char **av, char **env)
 				data.i++;
 			}
 			execute(list, env);
-			// if (str)
-			// 	free (str);		
-			str = parent_process(list, str);
-			list = NULL;
-			// free(list);
+			parent_process(list, str);
+			if (list) {
+                free_list(list);
+                list = NULL;
+            }
+			free (str);
 		}
 	}
 	return (0);
