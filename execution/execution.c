@@ -6,7 +6,7 @@
 /*   By: yamrire <yamrire@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 02:47:09 by yamrire           #+#    #+#             */
-/*   Updated: 2023/03/25 01:04:55 by yamrire          ###   ########.fr       */
+/*   Updated: 2023/03/25 01:47:11 by yamrire          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,10 @@ void	execute(t_list *list, char **env)
 				pipe(g_global.fd_pip);
 		}
 		start_exec(cmd->cmd[0], i);
-		if (g_global.pid[i] == 0)
+		if (g_global.pid[i] == 0 || (g_global.nbr_cmd == 1 && (!ft_strcmp("echo", cmd->cmd[0]) || !ft_strcmp("cd", cmd->cmd[0])
+		|| !ft_strcmp("pwd", cmd->cmd[0]) || !ft_strcmp("export", cmd->cmd[0])
+		|| !ft_strcmp("unset", cmd->cmd[0]) || !ft_strcmp("env", cmd->cmd[0])
+		|| !ft_strcmp("exit", cmd->cmd[0]))))
 			execute_one_cmd(cmd, env, i);
 		curr = curr->next;
 		i++;
