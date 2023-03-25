@@ -6,7 +6,7 @@
 /*   By: yamrire <yamrire@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 19:08:42 by yamrire           #+#    #+#             */
-/*   Updated: 2023/03/24 21:38:37 by yamrire          ###   ########.fr       */
+/*   Updated: 2023/03/25 01:02:25 by yamrire          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ int	main(int ac, char **av, char **env)
 	t_list	*list;
 	t_data	data;
 
-	signal(SIGINT, int_handler);
-	signal(SIGQUIT, quit_handler);
+	// signal(SIGINT, int_handler);
+	// signal(SIGQUIT, quit_handler);
 	g_global.exit_code = 0;
 	if (ac >= 1)
 	{
@@ -55,7 +55,11 @@ int	main(int ac, char **av, char **env)
 				data.i++;
 			}
 			execute(list, env);
-			str = parent_process(list, str);			
+			// if (str)
+			// 	free (str);		
+			str = parent_process(list, str);
+			list = NULL;
+			// free(list);
 		}
 	}
 	return (0);

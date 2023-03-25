@@ -6,7 +6,7 @@
 /*   By: yamrire <yamrire@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 02:47:09 by yamrire           #+#    #+#             */
-/*   Updated: 2023/03/24 04:35:29 by yamrire          ###   ########.fr       */
+/*   Updated: 2023/03/25 01:04:55 by yamrire          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,8 +87,11 @@ void	execute(t_list *list, char **env)
 				pipe(g_global.fd_pip);
 		}
 		start_exec(cmd->cmd[0], i);
-		execute_one_cmd(cmd, env, i);
+		if (g_global.pid[i] == 0)
+			execute_one_cmd(cmd, env, i);
 		curr = curr->next;
 		i++;
 	}
+	// free(g_global.pid);
+	// g_global.pid = NULL;
 }

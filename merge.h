@@ -6,7 +6,7 @@
 /*   By: yamrire <yamrire@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 05:13:04 by yamrire           #+#    #+#             */
-/*   Updated: 2023/03/24 16:44:23 by yamrire          ###   ########.fr       */
+/*   Updated: 2023/03/24 22:07:03 by yamrire          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,8 +131,8 @@ void	init_pipe(void);
 void	pipline(void);
 void	dup_tmp(void);
 void	check_position(t_pars *cmd, int i);
-void	int_handler(int sig);
-void	quit_handler(int sig);
+//void	int_handler(int sig);
+//void	quit_handler(int sig);
 char	*ft_trim(char *s, char c);
 
 #endif
