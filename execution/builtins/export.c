@@ -93,7 +93,8 @@ int	builtin_export(char **argv)
 				env_tmp = (t_env *)(env_list->content);
 				if (ft_strcmp(env_tmp->key, list[0]) == 0)
 				{
-					if (list[1]){
+					if (list[1])
+					{
 						free(env_tmp->value);
 						env_tmp->value = ft_strdup(list[1]);
 					}
