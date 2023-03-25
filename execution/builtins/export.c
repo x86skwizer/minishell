@@ -129,9 +129,15 @@ int	builtin_export(char **argv)
 			env_list = g_global.env;
 			if (check == 0)
 			{
-				env_node = env_create(list[0], list[1]);
+				if (list[1] == NULL && ft_strchr(argv[j], '='))
+					env_node = env_create(list[0], "");
+				else if (list[1] == NULL && !ft_strchr(argv[j], '='))
+					env_node = env_create(list[0], NULL);
+				else 
+					env_node = env_create(list[0], list[1]);
 				ft_lstadd_back(&(g_global.env), ft_lstnew(env_node));
 			}
+			free_double (list);
 			j++;
 		}
 	}

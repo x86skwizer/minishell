@@ -8,7 +8,10 @@ t_env	*env_create(char *key, char *value)
 	if (!env)
 		return (NULL);
 	env->key = ft_strdup(key);
-	env->value = ft_strdup(value);
+	if (value)
+        env->value = ft_strdup(value);
+    else 
+        env->value = NULL;
 	return (env);
 }
 
