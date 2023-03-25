@@ -6,7 +6,7 @@
 /*   By: yamrire <yamrire@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 01:07:47 by yamrire           #+#    #+#             */
-/*   Updated: 2023/03/25 03:53:58 by yamrire          ###   ########.fr       */
+/*   Updated: 2023/03/25 04:51:14 by yamrire          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -222,7 +222,7 @@ int	split_arg(char *str, t_pars **cmd)
 				{
 					inside_quote = str[i];
 					i++;
-					while (str[i] != inside_quote)
+					while (str[i] && str[i] != inside_quote)
 						i++;
 					inside_quote = 0;
 				}
