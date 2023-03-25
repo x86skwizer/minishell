@@ -6,7 +6,7 @@
 /*   By: yamrire <yamrire@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 01:07:47 by yamrire           #+#    #+#             */
-/*   Updated: 2023/03/24 22:13:52 by yamrire          ###   ########.fr       */
+/*   Updated: 2023/03/25 03:53:58 by yamrire          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,9 +91,11 @@ int	split_arg(char *str, t_pars **cmd)
 	int		j;
 	int		start;
 	int		nbr;
+	int 	inside_quote;
 
 	i = 0;
 	j = 0;
+	inside_quote = 0;
 	nbr = count_arg(str);
 	(*cmd)->cmd = malloc(sizeof(char *) * (nbr + 1));
 	while (str[i] != '\0' && str[i] != '|')
@@ -213,8 +215,19 @@ int	split_arg(char *str, t_pars **cmd)
 		else if (str[i] && str[i] != ' ' && str[i] != '|')
 		{
 			start = i;
-			while (str[i] && str[i] != ' ' && str[i] != '|')
+
+			while (str[i] && (str[i] != ' ' && str[i] != '|'))
+			{
+				if (str[i] == 34 || str[i] == 39)
+				{
+					inside_quote = str[i];
+					i++;
+					while (str[i] != inside_quote)
+						i++;
+					inside_quote = 0;
+				}
 				i++;
+			}
 			(*cmd)->cmd[j] = ft_substr(str, start, i - start);
 			while (check_expansion((*cmd)->cmd[j]))
 				expand_arg((&(*cmd)->cmd[j]));
