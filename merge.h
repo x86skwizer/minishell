@@ -6,7 +6,7 @@
 /*   By: yamrire <yamrire@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 05:13:04 by yamrire           #+#    #+#             */
-/*   Updated: 2023/03/26 02:44:39 by yamrire          ###   ########.fr       */
+/*   Updated: 2023/03/26 03:51:00 by yamrire          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,8 @@ typedef struct s_merge {
 	pid_t	*pid;
 	int		fd_pip[2];
 	int		fd_tmp;
+	int		fd_tmpin;
+	int		fd_tmpout;
 	int		nbr_cmd;
 	int		exit_code;
 }	t_merge;

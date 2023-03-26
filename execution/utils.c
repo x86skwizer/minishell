@@ -6,7 +6,7 @@
 /*   By: yamrire <yamrire@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 04:27:06 by yamrire           #+#    #+#             */
-/*   Updated: 2023/03/26 00:24:47 by yamrire          ###   ########.fr       */
+/*   Updated: 2023/03/26 03:53:47 by yamrire          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,11 @@ void	check_entry(t_pars *cmd)
 {
 	if ((cmd->input) || (cmd->delimiter))
 	{
+		if ((g_global.nbr_cmd == 1 && (!ft_strcmp("echo", cmd->cmd[0]) || !ft_strcmp("cd", cmd->cmd[0])
+        || !ft_strcmp("pwd", cmd->cmd[0]) || !ft_strcmp("export", cmd->cmd[0])
+        || !ft_strcmp("unset", cmd->cmd[0]) || !ft_strcmp("env", cmd->cmd[0])
+        || !ft_strcmp("exit", cmd->cmd[0]))))
+            g_global.fd_tmpin = dup(0); 
 		dup2(cmd->fd_input, 0);
 		close(cmd->fd_input);
 	}
@@ -25,7 +30,7 @@ void	check_entry(t_pars *cmd)
 		|| !ft_strcmp("pwd", cmd->cmd[0]) || !ft_strcmp("export", cmd->cmd[0])
 		|| !ft_strcmp("unset", cmd->cmd[0]) || !ft_strcmp("env", cmd->cmd[0])
 		|| !ft_strcmp("exit", cmd->cmd[0]))))
-			g_global.fd_tmp = dup(1);
+			g_global.fd_tmpout = dup(1);
 		dup2(cmd->fd_output, 1);
 		close(cmd->fd_output);
 		

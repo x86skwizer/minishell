@@ -6,7 +6,7 @@
 /*   By: yamrire <yamrire@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 02:47:09 by yamrire           #+#    #+#             */
-/*   Updated: 2023/03/26 00:32:42 by yamrire          ###   ########.fr       */
+/*   Updated: 2023/03/26 03:51:31 by yamrire          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,13 @@ void	execute_builtins(char **cmd, int i, t_pars *pars)
 		exit_error(g_global.exit_code, cmd[0]);
 	if (g_global.nbr_cmd > 1)
 			exit(g_global.exit_code);
-	if (g_global.nbr_cmd == 1 && (pars->input || pars->output || pars->delimiter))
-		dup2(g_global.fd_tmp, 1);
+	 if (g_global.nbr_cmd == 1 && (pars->input || pars->output || pars->delimiter))
+    {
+        if (pars->output)
+            dup2(g_global.fd_tmpout, 1);
+        if (pars->input ||   pars->delimiter)
+            dup2(g_global.fd_tmpin, 0);
+    } 
 }
 
 void	execute_one_cmd(t_pars *cmd, char **env, int i)
