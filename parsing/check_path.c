@@ -6,7 +6,7 @@
 /*   By: yamrire <yamrire@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 07:59:34 by yamrire           #+#    #+#             */
-/*   Updated: 2023/03/22 08:21:27 by yamrire          ###   ########.fr       */
+/*   Updated: 2023/03/26 22:39:52 by yamrire          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,14 @@ char	**arrange_paths(void)
 	return (paths);
 }
 
+void	join_cmd_path(t_pars **cmd, char *tmp, char *path_cmd)
+{
+	free((*cmd)->cmd[0]);
+	(*cmd)->cmd[0] = ft_strdup(path_cmd);
+	free(tmp);
+	free(path_cmd);
+}
+
 void	add_cmd_path(t_pars **cmd)
 {
 	char	*path_cmd;
@@ -75,10 +83,7 @@ void	add_cmd_path(t_pars **cmd)
 			path_cmd = ft_strjoin((*cmd)->paths[i], (*cmd)->cmd[0]);
 			if (access(path_cmd, F_OK | X_OK) == 0)
 			{
-				free((*cmd)->cmd[0]);
-				(*cmd)->cmd[0] = ft_strdup(path_cmd);
-				free(tmp);
-				free(path_cmd);
+				join_cmd_path(cmd, tmp, path_cmd);
 				return ;
 			}
 			free(path_cmd);
@@ -86,6 +91,6 @@ void	add_cmd_path(t_pars **cmd)
 		}
 		free((*cmd)->cmd[0]);
 		(*cmd)->cmd[0] = ft_strdup(tmp);
-		free(tmp);
 	}
+	free(tmp);
 }
