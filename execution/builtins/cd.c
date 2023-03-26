@@ -6,11 +6,19 @@
 /*   By: yamrire <yamrire@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 16:07:08 by yamrire           #+#    #+#             */
-/*   Updated: 2023/03/26 16:41:32 by yamrire          ###   ########.fr       */
+/*   Updated: 2023/03/26 20:09:38 by yamrire          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../merge.h"
+
+int	cd_print(char *new_path)
+{
+	ft_putstr_fd("cd: ", STDERR_FILENO);
+	ft_putstr_fd(new_path, STDERR_FILENO);
+	ft_putendl_fd(" no such file or directory", STDERR_FILENO);
+	return (1);
+}
 
 int	builtin_cd(char **args)
 {
@@ -31,12 +39,7 @@ int	builtin_cd(char **args)
 	search_replace("PWD", new_path);
 	ret = chdir(new_path);
 	if (ret < 0)
-	{
-		ft_putstr_fd("cd: ", STDERR_FILENO);
-		ft_putstr_fd(new_path, STDERR_FILENO);
-		ft_putendl_fd(" no such file or directory", STDERR_FILENO);
-		return (1);
-	}
+		return (cd_print(new_path));
 	free(old_path);
 	free(new_path);
 	return (ret);
