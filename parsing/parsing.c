@@ -6,125 +6,62 @@
 /*   By: yamrire <yamrire@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 01:07:47 by yamrire           #+#    #+#             */
-/*   Updated: 2023/03/26 16:56:53 by yamrire          ###   ########.fr       */
+/*   Updated: 2023/03/26 21:50:10 by yamrire          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../merge.h"
 
-int	count_arg(char *str)
+void	handle_quotes(t_pars **cmd, char *str, int *i, int *j)
 {
-	int	i;
-	int	nbr;
-
-	nbr = 0;
-	i = 0;
-	while (str[i] != '\0' && str[i] != '|')
+	if (str[*i] == 34)
 	{
-		while (str[i] && str[i] == ' ')
-			i++;
-		if (str[i] == 34)
-		{
-			i++;
-			while (str[i] && str[i] != 34)
-				i++;
-			nbr++;
-		}
-		else if (str[i] == 39)
-		{
-			i++;
-			while (str[i] && str[i] != 39)
-				i++;
-			nbr++;
-		}
-		else if (str[i] == '>')
-		{
-			i++;
-			if (str[i] == '>')
-			{
-				i++;
-				while (str[i] && str[i] == ' ')
-					i++;
-				while (str[i] && str[i] != ' ')
-					i++;
-			}
-			else
-			{
-				while (str[i] && str[i] == ' ')
-					i++;
-				while (str[i] && str[i] != ' ')
-					i++;
-			}
-		}
-		else if (str[i] == '<')
-		{
-			i++;
-			if (str[i] == '<')
-			{
-				i++;
-				while (str[i] && str[i] == ' ')
-					i++;
-				while (str[i] && str[i] != ' ')
-					i++;
-			}
-			else
-			{
-				while (str[i] && str[i] == ' ')
-					i++;
-				while (str[i] && str[i] != ' ')
-					i++;
-			}
-		}
-		else if (str[i] && str[i] != ' ' && str[i] != '|')
-		{
-			while (str[i] && str[i] != ' ' && str[i] != '|')
-				i++;
-			nbr++;
-		}
+		(*i) = double_quotes(cmd, str, *i, *j);
+		(*j)++;
 	}
-	return (nbr);
+	else if (str[*i] == 39)
+	{
+		(*i) = single_quotes(cmd, str, *i, *j);
+		(*j)++;
+	}
+}
+
+void	handle_redirections(t_pars **cmd, char *str, int *i)
+{
+	if (str[(*i)] == '>')
+	{
+		(*i)++;
+		if (str[(*i)] == '>')
+			(*i) = append_file(cmd, str, (*i));
+		else
+			(*i) = output_file(cmd, str, (*i));
+	}
+	else if (str[(*i)] == '<')
+	{
+		(*i)++;
+		if (str[(*i)] == '<')
+			(*i) = heredoc_open(cmd, str, (*i));
+		else
+			(*i) = input_file(cmd, str, (*i));
+	}
 }
 
 int	split_arg(char *str, t_pars **cmd)
 {
-	int		i;
-	int		j;
-	int		nbr;
+	int	i;
+	int	j;
 
 	i = 0;
 	j = 0;
-	nbr = count_arg(str);
-	(*cmd)->cmd = malloc(sizeof(char *) * (nbr + 1));
+	(*cmd)->cmd = malloc(sizeof(char *) * (count_arg(str) + 1));
 	while (str[i] != '\0' && str[i] != '|')
 	{
 		while (str[i] && str[i] == ' ')
 			i++;
-		if (str[i] == 34)
-		{
-			i = double_quotes(cmd, str, i, j);
-			j++;
-		}
-		else if (str[i] == 39)
-		{
-			i = single_quotes(cmd, str, i, j);
-			j++;
-		}
-		else if (str[i] == '>')
-		{
-			i++;
-			if (str[i] == '>')
-				i = append_file(cmd, str, i);
-			else
-				i = output_file(cmd, str, i);
-		}
-		else if (str[i] == '<')
-		{
-			i++;
-			if (str[i] == '<')
-				i = heredoc_open(cmd, str, i);
-			else
-				i = input_file(cmd, str, i);
-		}
+		if (str[i] == 34 || str[i] == 39)
+			handle_quotes(cmd, str, &i, &j);
+		else if (str[i] == '>' || str[i] == '<')
+			handle_redirections(cmd, str, &i);
 		else if (str[i] && str[i] != ' ' && str[i] != '|')
 		{
 			i = pars_and_check(cmd, str, i, j);
