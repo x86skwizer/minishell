@@ -6,7 +6,7 @@
 /*   By: yamrire <yamrire@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 04:50:56 by yamrire           #+#    #+#             */
-/*   Updated: 2023/03/25 01:50:31 by yamrire          ###   ########.fr       */
+/*   Updated: 2023/03/26 01:05:41 by yamrire          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	end_program(t_pars *cmd)
 		free_double(cmd->paths);
 }
 
-char	*parent_process(t_list *list, char *str)
+char	*parent_process(t_list *list)
 {
 	t_data	data;
 
