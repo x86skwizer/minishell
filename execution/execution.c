@@ -6,7 +6,7 @@
 /*   By: yamrire <yamrire@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 02:47:09 by yamrire           #+#    #+#             */
-/*   Updated: 2023/03/26 16:27:56 by yamrire          ###   ########.fr       */
+/*   Updated: 2023/03/26 18:26:06 by yamrire          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,8 @@ void	start_exec(char *cmd, int i)
 		handle_error(errno);
 }
 
-void	execute_builtins(char **cmd, int i, t_pars *pars)
+void	execute_built_cmd(char **cmd)
 {
-	if (g_global.nbr_cmd > 1)
-	{
-		if (g_global.pid[i] != 0)
-			return ;
-	}
 	if (!ft_strcmp("echo", cmd[0]))
 		g_global.exit_code = builtin_echo(cmd);
 	else if (!ft_strcmp("cd", cmd[0]))
@@ -42,6 +37,16 @@ void	execute_builtins(char **cmd, int i, t_pars *pars)
 		g_global.exit_code = builtin_unset(cmd);
 	else if (!ft_strcmp("exit", cmd[0]))
 		g_global.exit_code = builtin_exit(cmd);
+}
+
+void	execute_builtins(char **cmd, int i, t_pars *pars)
+{
+	if (g_global.nbr_cmd > 1)
+	{
+		if (g_global.pid[i] != 0)
+			return ;
+	}
+	execute_built_cmd(cmd);
 	if (g_global.exit_code)
 		exit_error(g_global.exit_code, cmd[0]);
 	if (g_global.nbr_cmd > 1)
