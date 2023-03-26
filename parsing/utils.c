@@ -6,7 +6,7 @@
 /*   By: yamrire <yamrire@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 02:25:12 by yamrire           #+#    #+#             */
-/*   Updated: 2023/03/26 16:51:09 by yamrire          ###   ########.fr       */
+/*   Updated: 2023/03/26 22:43:22 by yamrire          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,48 +39,52 @@ void	free_double(char **pointer)
 	pointer = NULL;
 }
 
-int	check_error_parsing(char *str)
+int    check_error_parsing2(char *str, int i)
 {
-	int	len;
-	int	i;
+    while (str[i] == ' ')
+        i--;
+    if (str[i] == '|')
+    {
+        g_global.exit_code = 258;
+        return (1);
+    }
+    else if (str[i] == '>')
+    {
+        g_global.exit_code = 258;
+        return (1);
+    }
+    else if (str[i] == '<')
+    {
+        g_global.exit_code = 258;
+        return (1);
+    }
+    return (0);
+}
 
-	len = ft_strlen(str);
-	i = 0;
-	while (str[i] == ' ')
-		i++;
-	if (str[i] == '|')
-	{
-		g_global.exit_code = 258;
-		return (1);
-	}
-	while (str[i])
-	{
-		if (str[i] == '|' && str[i + 1] == '|')
-		{
-			g_global.exit_code = 258;
-			return (1);
-		}
-		i++;
-	}
-	i = len - 1;
-	while (str[i] == ' ')
-		i--;
-	if (str[i] == '|')
-	{
-		g_global.exit_code = 258;
-		return (1);
-	}
-	else if (str[i] == '>')
-	{
-		g_global.exit_code = 258;
-		return (1);
-	}
-	else if (str[i] == '<')
-	{
-		g_global.exit_code = 258;
-		return (1);
-	}
-	return (0);
+int    check_error_parsing(char *str)
+{
+    int    len;
+    int    i;
+
+    len = ft_strlen(str);
+    i = 0;
+    while (str[i] == ' ')
+        i++;
+    if (str[i] == '|')
+    {
+        g_global.exit_code = 258;
+        return (1);
+    }
+    while (str[i])
+    {
+        if (str[i] == '|' && str[i + 1] == '|')
+        {
+            g_global.exit_code = 258;
+            return (1);
+        }
+        i++;
+    }
+    return (check_error_parsing2(str, len - 1));
 }
 
 int	count_cmd(char *str)

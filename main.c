@@ -6,7 +6,7 @@
 /*   By: yamrire <yamrire@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 19:08:42 by yamrire           #+#    #+#             */
-/*   Updated: 2023/03/26 18:21:44 by yamrire          ###   ########.fr       */
+/*   Updated: 2023/03/26 22:42:12 by yamrire          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,39 +53,64 @@ void	fill_main(char **env, char *str)
 	free (str);
 }
 
-void	main_loop(char **env, char *str)
+int    contains_spaces(char *str)
 {
-	int		i;
+    int    i;
 
-	while (1)
-	{
-		str = readline("minishell$  ");
-		if (str && *str)
-			add_history(str);
-		else if (str == NULL)
-			exit(0);
-		else
-		{
-			free(str);
-			continue ;
-		}
-		i = check_error_parsing(str);
-		if (i)
-		{
-			printf("minishell: syntax error unexpected token\n");
-			free(str);
-			continue ;
-		}
-		fill_main(env, str);
-	}
+    i = 0;
+    while (str[i])
+    {
+        if (str[i] != ' ')
+            return (0);
+        i++;
+    }
+    return (1);
+}
+
+int    check_cmd(char *str)
+{
+    add_history(str);
+    if (contains_spaces(str))
+    {
+        free(str);
+        return (1);
+    }
+    return (0);
+}
+
+void    main_loop(char **env, char *str)
+{
+    while (1)
+    {
+        str = readline("minishell$  ");
+        if (str && *str)
+        {    
+            if (check_cmd(str))
+                continue ;
+        }
+        else if (str == NULL)
+            exit(0);
+        else
+        {
+            free(str);
+            continue ;
+        }
+        if (check_error_parsing(str))
+        {
+            printf("minishell: syntax error unexpected token\n");
+            free(str);
+            continue ;
+        }
+        fill_main(env, str);
+    }
 }
 
 int	main(int ac, char **av, char **env)
 {
 	char	*str;
 
-	signal(SIGINT, int_handler);
-	signal(SIGQUIT, quit_handler);
+	// signal(SIGINT, int_handler);
+	// signal(SIGQUIT, quit_handler);
 	g_global.exit_code = 0;
 	if (ac >= 1)
 	{
