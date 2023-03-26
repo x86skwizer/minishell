@@ -6,7 +6,7 @@
 /*   By: yamrire <yamrire@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 02:25:12 by yamrire           #+#    #+#             */
-/*   Updated: 2023/03/24 16:43:57 by yamrire          ###   ########.fr       */
+/*   Updated: 2023/03/26 02:35:00 by yamrire          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,14 +121,17 @@ char	*ft_trim(char *s, char c)
 
 	str = ft_split(s, c);
 	i = 0;
-	tmp = str[0];
-	while (str[i + 1])
+
+	tmp = ft_strdup(str[0]);
+	i++;
+	while (str[i])
 	{
 		tmp1 = tmp;
-		tmp = ft_strjoin(tmp1, str[i + 1]);
+		tmp = ft_strjoin(tmp1, str[i]);
 		free(tmp1);
 		i++;
 	}
+	free_double(str);
 	free (s);
 	return (tmp);
 }
