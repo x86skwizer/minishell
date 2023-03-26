@@ -6,7 +6,7 @@
 /*   By: yamrire <yamrire@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 05:13:04 by yamrire           #+#    #+#             */
-/*   Updated: 2023/03/24 22:07:03 by yamrire          ###   ########.fr       */
+/*   Updated: 2023/03/26 02:44:39 by yamrire          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,6 @@ void	ft_lstadd_front(t_list **alst, t_list *new);
 void	ft_lstdelone(t_list *lst, void (*del)(void*));
 void	ft_lstclear(t_list **lst, void (*del)(void*));
 void	ft_lstiter(t_list *lst, void (*f)(void*));
-// t_list	*ft_lstmap(t_list *lst, void *(*f)(void*), void (*del)(void *));
 char	**arrange_paths(void);
 char	**get_paths(void);
 void	free_double(char **pointer);
@@ -119,20 +118,19 @@ void	rl_replace_line(const char *test, int flag);
 void	execute(t_list *list, char **env);
 char	*get_next_line(int fd);
 void	here_doc(t_pars *cmd);
-char	*parent_process(t_list *list, char *str);
+char	*parent_process(t_list *list);
 void	check_entry(t_pars *cmd);
 void	pipline(void);
 void	dup_tmp(void);
 void	check_position(t_pars *cmd, int i);
 void	end_program(t_pars *cmd);
-char	*parent_process(t_list *list, char *str);
 void	check_entry(t_pars *cmd);
 void	init_pipe(void);
 void	pipline(void);
 void	dup_tmp(void);
 void	check_position(t_pars *cmd, int i);
-//void	int_handler(int sig);
-//void	quit_handler(int sig);
+void	int_handler(int sig);
+void	quit_handler(int sig);
 char	*ft_trim(char *s, char c);
 
 #endif
