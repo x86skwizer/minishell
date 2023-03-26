@@ -6,7 +6,7 @@
 /*   By: yamrire <yamrire@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 02:25:12 by yamrire           #+#    #+#             */
-/*   Updated: 2023/03/26 02:35:00 by yamrire          ###   ########.fr       */
+/*   Updated: 2023/03/26 16:51:09 by yamrire          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,30 +56,30 @@ int	check_error_parsing(char *str)
 	while (str[i])
 	{
 		if (str[i] == '|' && str[i + 1] == '|')
-			{
-				g_global.exit_code = 258;
-				return (1);
-			}
+		{
+			g_global.exit_code = 258;
+			return (1);
+		}
 		i++;
 	}
 	i = len - 1;
 	while (str[i] == ' ')
 		i--;
 	if (str[i] == '|')
-		{
-			g_global.exit_code = 258;
-			return (1);
-		}
+	{
+		g_global.exit_code = 258;
+		return (1);
+	}
 	else if (str[i] == '>')
-		{
-			g_global.exit_code = 258;
-			return (1);
-		}
+	{
+		g_global.exit_code = 258;
+		return (1);
+	}
 	else if (str[i] == '<')
-		{
-			g_global.exit_code = 258;
-			return (1);
-		}
+	{
+		g_global.exit_code = 258;
+		return (1);
+	}
 	return (0);
 }
 
@@ -109,29 +109,4 @@ int	count_cmd(char *str)
 		i++;
 	}
 	return (nbr);
-}
-
-
-char	*ft_trim(char *s, char c)
-{
-	char	**str;
-	char	*tmp;
-	char	*tmp1;
-	int		i;
-
-	str = ft_split(s, c);
-	i = 0;
-
-	tmp = ft_strdup(str[0]);
-	i++;
-	while (str[i])
-	{
-		tmp1 = tmp;
-		tmp = ft_strjoin(tmp1, str[i]);
-		free(tmp1);
-		i++;
-	}
-	free_double(str);
-	free (s);
-	return (tmp);
 }

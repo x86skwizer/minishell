@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   export.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yamrire <yamrire@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/26 16:07:26 by yamrire           #+#    #+#             */
+/*   Updated: 2023/03/26 16:39:26 by yamrire          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../merge.h"
 
 void	ft_lstswap(t_list *lst1, t_list *lst2)
@@ -43,7 +55,6 @@ int	print_export(t_list *env_list)
 	t_list		*env_list1;
 
 	env_list1 = sort_env(env_list);
-
 	env_list1 = g_global.env;
 	while (env_list1)
 	{
@@ -65,11 +76,11 @@ int	print_export(t_list *env_list)
 
 int	builtin_export(char **argv)
 {
-	int			j;
-	t_list		*env_list;
-	t_env		*env_tmp;
-	int			check;
-	char		**list;
+	int		j;
+	t_list	*env_list;
+	t_env	*env_tmp;
+	int		check;
+	char	**list;
 	t_env	*env_node;
 
 	j = 0;
@@ -107,7 +118,6 @@ int	builtin_export(char **argv)
 				}
 				env_list = env_list->next;
 			}
-			
 			env_list = g_global.env;
 			if (check == 0)
 			{
@@ -115,7 +125,7 @@ int	builtin_export(char **argv)
 					env_node = env_create(list[0], "");
 				else if (list[1] == NULL && !ft_strchr(argv[j], '='))
 					env_node = env_create(list[0], NULL);
-				else 
+				else
 					env_node = env_create(list[0], list[1]);
 				ft_lstadd_back(&(g_global.env), ft_lstnew(env_node));
 			}
@@ -125,4 +135,3 @@ int	builtin_export(char **argv)
 	}
 	return (0);
 }
-

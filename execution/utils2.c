@@ -1,32 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   signals.c                                          :+:      :+:    :+:   */
+/*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yamrire <yamrire@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/26 16:08:37 by yamrire           #+#    #+#             */
-/*   Updated: 2023/03/26 16:08:39 by yamrire          ###   ########.fr       */
+/*   Created: 2023/03/26 16:20:19 by yamrire           #+#    #+#             */
+/*   Updated: 2023/03/26 16:21:36 by yamrire          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../merge.h"
-#include <readline/readline.h>
-#include <readline/history.h>
 
-void	int_handler(int sig)
+void	check_position(t_pars *cmd, int i)
 {
-	(void)sig;
-	printf("\n");
-	rl_on_new_line();
-	rl_replace_line("", 0);
-	rl_redisplay();
-	g_global.exit_code = 1;
-}
-
-void	quit_handler(int sig)
-{
-	(void)sig;
-	rl_on_new_line();
-	rl_redisplay();
+	if (i == 0)
+	{
+		if (g_global.nbr_cmd > 1)
+			pipline();
+		check_entry(cmd);
+	}
+	else if (i == g_global.nbr_cmd - 1)
+	{
+		dup_tmp();
+		check_entry(cmd);
+	}
+	else if (i > 0 && i < g_global.nbr_cmd - 1)
+	{
+		pipline();
+		dup_tmp();
+		check_entry(cmd);
+	}
 }

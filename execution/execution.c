@@ -6,7 +6,7 @@
 /*   By: yamrire <yamrire@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 02:47:09 by yamrire           #+#    #+#             */
-/*   Updated: 2023/03/26 03:51:31 by yamrire          ###   ########.fr       */
+/*   Updated: 2023/03/26 16:27:56 by yamrire          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,7 @@
 
 void	start_exec(char *cmd, int i)
 {
-	if (g_global.nbr_cmd == 1 && (!ft_strcmp("echo", cmd) || !ft_strcmp("cd", cmd)
-		|| !ft_strcmp("pwd", cmd) || !ft_strcmp("export", cmd)
-		|| !ft_strcmp("unset", cmd) || !ft_strcmp("env", cmd)
-		|| !ft_strcmp("exit", cmd)))
+	if (g_global.nbr_cmd == 1 && is_builtin(cmd))
 		return ;
 	g_global.pid[i] = fork();
 	if (g_global.pid[i] == -1)
@@ -48,23 +45,21 @@ void	execute_builtins(char **cmd, int i, t_pars *pars)
 	if (g_global.exit_code)
 		exit_error(g_global.exit_code, cmd[0]);
 	if (g_global.nbr_cmd > 1)
-			exit(g_global.exit_code);
-	 if (g_global.nbr_cmd == 1 && (pars->input || pars->output || pars->delimiter))
-    {
-        if (pars->output)
-            dup2(g_global.fd_tmpout, 1);
-        if (pars->input ||   pars->delimiter)
-            dup2(g_global.fd_tmpin, 0);
-    } 
+		exit(g_global.exit_code);
+	if (g_global.nbr_cmd == 1 && (pars->input
+			|| pars->output || pars->delimiter))
+	{
+		if (pars->output)
+			dup2(g_global.fd_tmpout, 1);
+		if (pars->input || pars->delimiter)
+			dup2(g_global.fd_tmpin, 0);
+	}
 }
 
 void	execute_one_cmd(t_pars *cmd, char **env, int i)
 {
 	check_position(cmd, i);
-	if (ft_strcmp("echo", cmd->cmd[0]) && ft_strcmp("cd", cmd->cmd[0])
-		&& ft_strcmp("pwd", cmd->cmd[0]) && ft_strcmp("export", cmd->cmd[0])
-		&& ft_strcmp("unset", cmd->cmd[0]) && ft_strcmp("env", cmd->cmd[0])
-		&& ft_strcmp("exit", cmd->cmd[0]) && g_global.pid[i] == 0)
+	if (!is_builtin(cmd->cmd[0]) && g_global.pid[i] == 0)
 	{
 		if (execve(cmd->cmd[0], cmd->cmd, env))
 			exit_error(errno, cmd->cmd[0]);
@@ -94,10 +89,8 @@ void	execute(t_list *list, char **env)
 				pipe(g_global.fd_pip);
 		}
 		start_exec(cmd->cmd[0], i);
-		if (g_global.pid[i] == 0 || (g_global.nbr_cmd == 1 && (!ft_strcmp("echo", cmd->cmd[0]) || !ft_strcmp("cd", cmd->cmd[0])
-		|| !ft_strcmp("pwd", cmd->cmd[0]) || !ft_strcmp("export", cmd->cmd[0])
-		|| !ft_strcmp("unset", cmd->cmd[0]) || !ft_strcmp("env", cmd->cmd[0])
-		|| !ft_strcmp("exit", cmd->cmd[0]))))
+		if (g_global.pid[i] == 0 || (g_global.nbr_cmd == 1
+				&& is_builtin(cmd->cmd[0])))
 			execute_one_cmd(cmd, env, i);
 		curr = curr->next;
 		i++;

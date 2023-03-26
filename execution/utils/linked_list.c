@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   linked_list.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yamrire <yamrire@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/26 16:08:04 by yamrire           #+#    #+#             */
+/*   Updated: 2023/03/26 16:08:16 by yamrire          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../merge.h"
 
 void	ft_lstadd_front(t_list **alst, t_list *new)
@@ -45,34 +57,6 @@ void	ft_lstiter(t_list *lst, void (*f)(void*))
 		lst = lst->next;
 	}
 }
-
-// t_list	*ft_lstmap(t_list *lst, void *(*f)(void*), void (*del)(void *))
-// {
-// 	t_list	*first;
-// 	t_list	*new;
-
-// 	if (!f || !del)
-// 		return (NULL);
-// 	first = NULL;
-// 	while (lst)
-// 	{
-// 		if (!(new == ft_lstnew((*f)(lst->content))))
-// 		{
-// 			while (first)
-// 			{
-// 				new = first->next;
-// 				(*del)(first->content);
-// 				free(first);
-// 				first = new;
-// 			}
-// 			lst = NULL;
-// 			return (NULL);
-// 		}
-// 		ft_lstadd_back(&first, new);
-// 		lst = lst->next;
-// 	}
-// 	return (first);
-// }
 
 int	ft_lstsize(t_list *lst)
 {
