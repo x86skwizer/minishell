@@ -6,11 +6,25 @@
 /*   By: yamrire <yamrire@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 16:50:14 by yamrire           #+#    #+#             */
-/*   Updated: 2023/03/26 16:55:59 by yamrire          ###   ########.fr       */
+/*   Updated: 2023/03/26 22:47:46 by yamrire          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../merge.h"
+
+void	free_double(char **pointer)
+{
+	int	i;
+
+	i = 0;
+	while (pointer[i])
+	{
+		free(pointer[i]);
+		i++;
+	}
+	free (pointer);
+	pointer = NULL;
+}
 
 char	*ft_trim(char *s, char c)
 {
