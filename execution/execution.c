@@ -6,7 +6,7 @@
 /*   By: yamrire <yamrire@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 02:47:09 by yamrire           #+#    #+#             */
-/*   Updated: 2023/03/25 01:47:11 by yamrire          ###   ########.fr       */
+/*   Updated: 2023/03/26 00:32:42 by yamrire          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	start_exec(char *cmd, int i)
 		handle_error(errno);
 }
 
-void	execute_builtins(char **cmd, int i)
+void	execute_builtins(char **cmd, int i, t_pars *pars)
 {
 	if (g_global.nbr_cmd > 1)
 	{
@@ -48,7 +48,9 @@ void	execute_builtins(char **cmd, int i)
 	if (g_global.exit_code)
 		exit_error(g_global.exit_code, cmd[0]);
 	if (g_global.nbr_cmd > 1)
-		exit(g_global.exit_code);
+			exit(g_global.exit_code);
+	if (g_global.nbr_cmd == 1 && (pars->input || pars->output || pars->delimiter))
+		dup2(g_global.fd_tmp, 1);
 }
 
 void	execute_one_cmd(t_pars *cmd, char **env, int i)
@@ -63,7 +65,7 @@ void	execute_one_cmd(t_pars *cmd, char **env, int i)
 			exit_error(errno, cmd->cmd[0]);
 	}
 	else
-		execute_builtins(cmd->cmd, i);
+		execute_builtins(cmd->cmd, i, cmd);
 }
 
 void	execute(t_list *list, char **env)
@@ -95,6 +97,4 @@ void	execute(t_list *list, char **env)
 		curr = curr->next;
 		i++;
 	}
-	// free(g_global.pid);
-	// g_global.pid = NULL;
 }
