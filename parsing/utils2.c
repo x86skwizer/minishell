@@ -6,11 +6,24 @@
 /*   By: yamrire <yamrire@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 16:50:14 by yamrire           #+#    #+#             */
-/*   Updated: 2023/03/26 22:47:46 by yamrire          ###   ########.fr       */
+/*   Updated: 2023/03/26 22:55:43 by yamrire          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../merge.h"
+
+void	free_list(t_list *list)
+{
+	t_list	*tmp;
+
+	while (list)
+	{
+		tmp = list;
+		list = list->next;
+		free(tmp->content);
+		free(tmp);
+	}
+}
 
 void	free_double(char **pointer)
 {

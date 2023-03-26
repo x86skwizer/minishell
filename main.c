@@ -6,7 +6,7 @@
 /*   By: yamrire <yamrire@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 19:08:42 by yamrire           #+#    #+#             */
-/*   Updated: 2023/03/26 22:42:12 by yamrire          ###   ########.fr       */
+/*   Updated: 2023/03/26 22:55:27 by yamrire          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,19 +15,6 @@
 #include <readline/history.h>
 
 t_merge	g_global;
-
-void	free_list(t_list *list)
-{
-	t_list	*tmp;
-
-	while (list)
-	{
-		tmp = list;
-		list = list->next;
-		free(tmp->content);
-		free(tmp);
-	}
-}
 
 void	fill_main(char **env, char *str)
 {
@@ -53,64 +40,64 @@ void	fill_main(char **env, char *str)
 	free (str);
 }
 
-int    contains_spaces(char *str)
+int	contains_spaces(char *str)
 {
-    int    i;
+	int	i;
 
-    i = 0;
-    while (str[i])
-    {
-        if (str[i] != ' ')
-            return (0);
-        i++;
-    }
-    return (1);
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] != ' ')
+			return (0);
+		i++;
+	}
+	return (1);
 }
 
-int    check_cmd(char *str)
+int	check_cmd(char *str)
 {
-    add_history(str);
-    if (contains_spaces(str))
-    {
-        free(str);
-        return (1);
-    }
-    return (0);
+	add_history(str);
+	if (contains_spaces(str))
+	{
+		free(str);
+		return (1);
+	}
+	return (0);
 }
 
-void    main_loop(char **env, char *str)
+void	main_loop(char **env, char *str)
 {
-    while (1)
-    {
-        str = readline("minishell$  ");
-        if (str && *str)
-        {    
-            if (check_cmd(str))
-                continue ;
-        }
-        else if (str == NULL)
-            exit(0);
-        else
-        {
-            free(str);
-            continue ;
-        }
-        if (check_error_parsing(str))
-        {
-            printf("minishell: syntax error unexpected token\n");
-            free(str);
-            continue ;
-        }
-        fill_main(env, str);
-    }
+	while (1)
+	{
+		str = readline("minishell$  ");
+		if (str && *str)
+		{
+			if (check_cmd(str))
+				continue ;
+		}
+		else if (str == NULL)
+			exit(0);
+		else
+		{
+			free(str);
+			continue ;
+		}
+		if (check_error_parsing(str))
+		{
+			printf("minishell: syntax error unexpected token\n");
+			free(str);
+			continue ;
+		}
+		fill_main(env, str);
+	}
 }
 
 int	main(int ac, char **av, char **env)
 {
 	char	*str;
 
-	// signal(SIGINT, int_handler);
-	// signal(SIGQUIT, quit_handler);
+	/* signal(SIGINT, int_handler);
+	signal(SIGQUIT, quit_handler); */
 	g_global.exit_code = 0;
 	if (ac >= 1)
 	{
