@@ -6,7 +6,7 @@
 /*   By: yamrire <yamrire@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 16:07:14 by yamrire           #+#    #+#             */
-/*   Updated: 2023/03/26 16:43:26 by yamrire          ###   ########.fr       */
+/*   Updated: 2023/03/27 01:11:01 by yamrire          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	ft_cmp_n(char *str)
 int	builtin_echo(char **args)
 {
 	int	i;
-
+	
 	i = 1;
 	if (args[1] && (!ft_strcmp(args[1], "-n") || ft_cmp_n(args[1])))
 		i++;
@@ -41,7 +41,7 @@ int	builtin_echo(char **args)
 			ft_putstr_fd(" ", STDOUT_FILENO);
 		i++;
 	}
-	if (args[1] && !ft_cmp_n(args[1]) && ft_strcmp(args[1], "-n"))
+	if ((args[1] && !ft_cmp_n(args[1]) && ft_strcmp(args[1], "-n")) || !args[1])
 		ft_putstr_fd("\n", STDOUT_FILENO);
 	return (0);
 }
