@@ -6,7 +6,7 @@
 /*   By: yamrire <yamrire@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 05:13:04 by yamrire           #+#    #+#             */
-/*   Updated: 2023/03/26 22:56:10 by yamrire          ###   ########.fr       */
+/*   Updated: 2023/03/27 00:53:21 by yamrire          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,5 +146,8 @@ int		override_env_vat(t_list	*env_list, char	**list, char *argv);
 void	add_env_var(char **list, char *argv);
 void	check_quotes(char **argv, int j);
 void	free_list(t_list *list);
+int		check_expansion(char *cmd);
+int		check_env_var(char *s);
+void	expand_question_mark(char **s);
 
 #endif
