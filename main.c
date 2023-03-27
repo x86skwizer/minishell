@@ -6,7 +6,7 @@
 /*   By: yamrire <yamrire@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 19:08:42 by yamrire           #+#    #+#             */
-/*   Updated: 2023/03/26 22:55:27 by yamrire          ###   ########.fr       */
+/*   Updated: 2023/03/27 01:00:37 by yamrire          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,8 +96,8 @@ int	main(int ac, char **av, char **env)
 {
 	char	*str;
 
-	/* signal(SIGINT, int_handler);
-	signal(SIGQUIT, quit_handler); */
+	signal(SIGINT, int_handler);
+	signal(SIGQUIT, quit_handler);
 	g_global.exit_code = 0;
 	if (ac >= 1)
 	{
